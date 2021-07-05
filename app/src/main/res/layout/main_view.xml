@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="273dp"
+            android:background="@drawable/blue_bg">
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="75dp"
+                android:src="@drawable/logo"></ImageView>
+
+<!--            <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                android:src="@drawable/a"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="35dp">-->
+<!--            </de.hdodenhof.circleimageview.CircleImageView>-->
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"></LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="18.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_fill__rounded_color"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:onClick="login"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/btn_login"
+            android:textColor="#ffffff"
+            android:textSize="12sp"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/text_o"
+            android:textColor="#aeaeae"
+            android:textSize="10.5sp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="18.7dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/blue_fill__rounded_color"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:onClick="register"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:text="@string/btn_register"
+            android:textColor="#ffffff"
+            android:textSize="12sp"></TextView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
