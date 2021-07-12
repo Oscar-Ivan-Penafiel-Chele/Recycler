@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">Free Recycler</string>
+    <string name="app_name">Stack</string>
     <string name="btn_login">Ingresar</string>
     <string name="btn_register">Crear Cuenta</string>
     <string name="text_o">Or</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_navigation">MainActivity</string>
+    <string name="title_home">Yo</string>
+    <string name="title_dashboard">Acerca de</string>
+    <string name="title_notifications">Cerrar Sesión</string>
+    <string name="title_login">Login activity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

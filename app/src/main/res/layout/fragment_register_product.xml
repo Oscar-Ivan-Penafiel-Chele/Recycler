@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegisterProductFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_head"
+            >
+
+            <Button
+                android:id="@+id/btn_back_pro"
+                android:layout_width="28dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/black"
+                android:background="@drawable/ic_arrow_left"></Button>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:paddingTop="18dp"
+                android:text="Registrar Producto"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginTop="110dp">
+            <TextView
+                android:layout_width="280dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="*Complete los siguientes campos"
+                android:textSize="17dp"
+                ></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="vertical"
+            android:layout_marginTop="180dp">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="1. Descripción del Producto:"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="vertical"
+            android:layout_marginTop="215dp">
+            <EditText
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="vertical"
+            android:layout_marginTop="300dp">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_gravity="center"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="2. Peso (kg):"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="vertical"
+            android:layout_marginTop="330dp">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:inputType="number"></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layout_marginTop="430dp">
+            <Button
+                android:id="@+id/btn_guardar"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_button_rp"
+                android:text="Guardar"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                ></Button>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
