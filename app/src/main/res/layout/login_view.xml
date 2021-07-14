@@ -116,7 +116,8 @@
 
         </RelativeLayout>
 
-        <TextView
+        <Button
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -126,7 +127,6 @@
             android:background="@drawable/blue_fill__rounded_color"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
-            android:onClick="home"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
             android:text="Ingresar"

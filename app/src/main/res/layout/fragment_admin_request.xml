@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProductsFragment">
+    tools:context=".fragments.AdminRequestFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:paddingTop="18dp"
-                android:text="Productos"
+                android:text="Peticiones"
                 android:textColor="@color/black"
                 android:textSize="19dp"
                 android:textStyle="bold"></TextView>
@@ -40,16 +40,10 @@
             android:layout_marginTop="80dp"
             android:gravity="center"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/ic_btn_add"
-                ></Button>
+
             <EditText
                 android:id="@+id/edit_search"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:hint="Buscar..."
                 android:paddingLeft="15dp"
@@ -80,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:background="@drawable/border"
-                        android:text="Tipo de Material"
+                        android:text="Nombre"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         android:layout_weight="0.5"></TextView>
@@ -88,7 +82,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="Acciones"
+                        android:background="@drawable/border"
+                        android:text="Fecha y Hora"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Acción"
                         android:textAlignment="center"
                         android:textSize="16dp"
                         android:textStyle="bold"
@@ -104,10 +107,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="Papel"
+                        android:text="Sebastian Coello"
                         android:textSize="14dp"
                         android:background="@drawable/border_body"
                         android:layout_weight="0.5"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="2021/07/2 11:30:00"
+                        android:textSize="14dp"
+                        android:background="@drawable/border_body"
+                        android:layout_weight="0.5"></TextView>
+
                     <LinearLayout
                         android:layout_weight="0.2"
                         android:layout_width="match_parent"
@@ -115,20 +128,13 @@
                         android:orientation="horizontal"
                         android:background="@drawable/border_body"
                         android:weightSum="1">
-                        <Button
-                            android:id="@+id/btn_edit"
-                            android:layout_width="30dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="30dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
                         <Button
                             android:id="@+id/btn_delete"
                             android:layout_width="31dp"
                             android:layout_height="33dp"
                             android:layout_marginTop="3dp"
                             android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_delete"></Button>
+                            android:background="@drawable/ic_view"></Button>
                     </LinearLayout>
                 </TableRow>
 
@@ -140,7 +146,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="Plástico"
+                        android:text="Jeanpier Mendoza"
+                        android:textSize="14dp"
+                        android:background="@drawable/border_body"
+                        android:layout_weight="0.5"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="2021/07/2 11:30:00"
                         android:textSize="14dp"
                         android:background="@drawable/border_body"
                         android:layout_weight="0.5"></TextView>
@@ -152,17 +166,11 @@
                         android:background="@drawable/border_body"
                         android:weightSum="1">
                         <Button
-                            android:layout_width="30dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="30dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
-                        <Button
                             android:layout_width="31dp"
                             android:layout_height="33dp"
                             android:layout_marginTop="3dp"
                             android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_delete"></Button>
+                            android:background="@drawable/ic_view"></Button>
                     </LinearLayout>
                 </TableRow>
                 <TableRow
@@ -173,7 +181,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="Vidrio"
+                        android:text="Bryan León"
+                        android:textSize="14dp"
+                        android:background="@drawable/border_body"
+                        android:layout_weight="0.5"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="2021/07/2 11:30:00"
                         android:textSize="14dp"
                         android:background="@drawable/border_body"
                         android:layout_weight="0.5"></TextView>
@@ -185,17 +201,11 @@
                         android:background="@drawable/border_body"
                         android:weightSum="1">
                         <Button
-                            android:layout_width="30dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="30dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
-                        <Button
                             android:layout_width="31dp"
                             android:layout_height="33dp"
                             android:layout_marginTop="3dp"
                             android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_delete"></Button>
+                            android:background="@drawable/ic_view"></Button>
                     </LinearLayout>
                 </TableRow>
             </TableLayout>
