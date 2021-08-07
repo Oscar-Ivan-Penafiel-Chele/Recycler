@@ -37,7 +37,7 @@ public class register extends AppCompatActivity {
         Intent next = new Intent(this, register_2.class);
         next.putExtra("nombre",nombre);
         next.putExtra("apellido",apellido);
-        next.putExtra("telenofo",telefono);
+        next.putExtra("telefono",telefono);
         startActivity(next);
     }
 }
