@@ -25,6 +25,7 @@ public class register_2 extends AppCompatActivity {
         //telefono1 = getIntent().getStringExtra("telefono");
     }
     public void registrar(View view){
+        HttpsTrustManager.allowAllSSL();
         String correo, contraseña,nombre1, apellido1, telefono1;
         correo=correo1.getText().toString();
         contraseña = contraseña1.getText().toString();
@@ -35,10 +36,9 @@ public class register_2 extends AppCompatActivity {
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
-        System.out.println(nombre1+apellido1+telefono1+correo+contraseña);
 
-        String url="https://192.168.1.3/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contraseña="+contraseña;
-
+        String url="https://192.168.1.3/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contrasena="+contraseña;
+        System.out.println(url);
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {
@@ -46,7 +46,8 @@ public class register_2 extends AppCompatActivity {
                 Intent next = new Intent(this, login.class);
                 startActivity(next);
         }, (error) -> {
-            Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
+            System.out.println(error);
+                    Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
         });
         servicio.add(respuesta);
 
