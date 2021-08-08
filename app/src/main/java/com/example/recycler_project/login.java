@@ -21,7 +21,7 @@ public class login extends AppCompatActivity {
     EditText txt_username, pass;
     Button btn_login;
     String username;
-
+    String rol;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +32,10 @@ public class login extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         btn_login = (Button) findViewById(R.id.btn_login);
         //btn_login.setOnClickListener(this::home);
-        recuperarPreferencias();
+        recuperarPreferencias(); //
     }
     public void login(View view){
-        HttpsTrustManager.allowAllSSL();
+        HttpsTrustManager.allowAllSSL(); //PErmite conexion incluso si expiro el ssl de la pagina (Página no segura)
         String usuario = txt_username.getText().toString();
         String contrasena = pass.getText().toString();
         if(usuario.equals("") || contrasena.equals("")){
@@ -45,22 +45,24 @@ public class login extends AppCompatActivity {
         String url="https://192.168.1.3/Sentencias/Login.php?usuario="+usuario+"&contrasena="+contrasena;
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
-                Request.Method.GET, url, (response) -> {
+                Request.Method.GET, url, (response) -> { //Logra realizar conexion
                     //Toast.makeText(getApplicationContext(),response, Toast.LENGTH_SHORT).show();
+
+                    if(response.equalsIgnoreCase("Correcto")){ // usuario reciclador  rol=2
                         guardarPreferencias(usuario, contrasena, response);
-                    if(response.equalsIgnoreCase("Correcto")){
                         Intent next = new Intent(this, Navigation.class);
                         startActivity(next);
 
-                    }else if (response.equalsIgnoreCase("Admin")){
+                    }else if (response.equalsIgnoreCase("Admin")){ // usuario administrados  rol=1
+                        guardarPreferencias(usuario, contrasena, response);
                         Intent next = new Intent(this, AdminNavigationActivity.class);
                         startActivity(next);
-                    }else if (response.equalsIgnoreCase("Incorrecto")){
+                    }else if (response.equalsIgnoreCase("Incorrecto")){ // No se encontre la cuenta en la BDD
                         Toast.makeText(this, "Usuario o contraseña invalidos", Toast.LENGTH_SHORT).show();
                     }
 
         }, (error) -> {
-            System.out.println(error);
+            System.out.println(error); // No logra realizar conexion;
             Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
         });
         servicio.add(respuesta);
@@ -68,7 +70,13 @@ public class login extends AppCompatActivity {
 
     }
 
-    public void guardarPreferencias(String usuario, String contraseña, String rol){
+    public void guardarPreferencias(String usuario, String contraseña, String r){ //guarda datos se sesion
+
+        if(r.equalsIgnoreCase("Correcto")){
+            rol="2";
+        }else if(r.equalsIgnoreCase("Admin")){
+            rol="1";
+        }
         SharedPreferences preferences = getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("usuario", usuario);
@@ -78,7 +86,7 @@ public class login extends AppCompatActivity {
         editor.commit();
     }
 
-    public void recuperarPreferencias(){
+    public void recuperarPreferencias(){ //Recupera datos si ya existe una sesion iniciada;
         txt_username = (EditText) findViewById(R.id.username_input);
         pass = (EditText) findViewById(R.id.pass);
         SharedPreferences preferences=getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);

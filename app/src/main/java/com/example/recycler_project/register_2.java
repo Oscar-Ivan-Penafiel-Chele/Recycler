@@ -42,9 +42,13 @@ public class register_2 extends AppCompatActivity {
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {
+
                 Toast.makeText(getApplicationContext(),response, Toast.LENGTH_SHORT).show();
+                if(response.equals("usuario ya existe, coloque otro nombre")){
+
+                }else{
                 Intent next = new Intent(this, login.class);
-                startActivity(next);
+                startActivity(next);}
         }, (error) -> {
             System.out.println(error);
                     Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();

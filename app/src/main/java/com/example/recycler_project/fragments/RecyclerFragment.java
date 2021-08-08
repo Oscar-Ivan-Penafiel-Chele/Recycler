@@ -21,7 +21,7 @@ import com.example.recycler_project.R;
  * create an instance of this fragment.
  */
 public class RecyclerFragment extends Fragment {
-
+    int id;
     Button btn_back;
     Button btn_paper;
     Button btn_glass;
@@ -90,8 +90,15 @@ public class RecyclerFragment extends Fragment {
                 onBackPress();
                 break;
             case R.id.btn_paper:
+                id=1;
+                showSelectedFragment(new RegisterProductFragment());
+                break;
             case R.id.btn_plastic:
+                id=2;
+                showSelectedFragment(new RegisterProductFragment());
+                break;
             case R.id.btn_glass:
+                id=3;
                 showSelectedFragment(new RegisterProductFragment());
                 break;
         }

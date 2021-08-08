@@ -4,7 +4,7 @@
     $db_contra="";
     $db_nombre= "reciclaje";
     $db_usuario = "root";
-
+    $tablename="usuario";
     $conexion=mysqli_connect($db_host,$db_usuario,$db_contra);
 
     if(mysqli_connect_errno()){
