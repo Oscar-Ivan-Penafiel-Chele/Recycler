@@ -3,10 +3,12 @@ package com.example.recycler_project.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.recycler_project.R;
 
@@ -16,6 +18,7 @@ import com.example.recycler_project.R;
  * create an instance of this fragment.
  */
 public class AdminHomeFragment extends Fragment {
+    Button reciclador, registro;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +64,28 @@ public class AdminHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_admin_home, container, false);
+        reciclador=root.findViewById(R.id.btn_recyclera);
+        registro=root.findViewById(R.id.btn_registera);
+
+        reciclador.setOnClickListener(this::onClick);
+        registro.setOnClickListener(this::onClick);
+        return root;
+
     }
+
+    public void onClick(View v) {
+
+    }
+    private void showSelectedFragment (Fragment fragment) {
+        if(fragment != null){
+            getFragmentManager().beginTransaction().replace(R.id.nav_cont_admin,fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+
+
 }

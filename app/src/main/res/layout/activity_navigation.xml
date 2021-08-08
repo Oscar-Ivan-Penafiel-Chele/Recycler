@@ -20,8 +20,7 @@
         android:layout_gravity="bottom"
         android:background="@color/white"
         android:clickable="true"
-        app:itemTextColor="@color/gray"
         app:itemIconTint="@color/gray"
-        app:menu="@menu/main_navigation"
-        ></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:itemTextColor="@color/gray"
+        app:menu="@menu/main_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
