@@ -37,7 +37,7 @@ public class register_2 extends AppCompatActivity {
             return;
         }
 
-        String url="https://192.168.1.3/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contrasena="+contraseña;
+        String url="https://192.168.1.4/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contrasena="+contraseña;
         System.out.println(url);
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(

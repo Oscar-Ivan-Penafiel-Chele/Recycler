@@ -16,12 +16,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class login extends AppCompatActivity {
 
     EditText txt_username, pass;
     Button btn_login;
     String username;
-    String rol;
+    int rol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,8 @@ public class login extends AppCompatActivity {
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
-        String url="https://192.168.1.3/Sentencias/Login.php?usuario="+usuario+"&contrasena="+contrasena;
+
+        String url="https://192.168.1.4/Sentencias/Login.php?usuario="+usuario+"&contrasena="+contrasena;
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> { //Logra realizar conexion
@@ -73,15 +79,15 @@ public class login extends AppCompatActivity {
     public void guardarPreferencias(String usuario, String contraseña, String r){ //guarda datos se sesion
 
         if(r.equalsIgnoreCase("Correcto")){
-            rol="2";
+            rol=2;
         }else if(r.equalsIgnoreCase("Admin")){
-            rol="1";
+            rol=1;
         }
         SharedPreferences preferences = getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("usuario", usuario);
         editor.putString("contraseña", contraseña);
-        editor.putString("rol", rol);
+        editor.putInt("rol", rol);
         editor.putBoolean("sesion",true);
         editor.commit();
     }
@@ -90,8 +96,8 @@ public class login extends AppCompatActivity {
         txt_username = (EditText) findViewById(R.id.username_input);
         pass = (EditText) findViewById(R.id.pass);
         SharedPreferences preferences=getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
-        txt_username.setText(preferences.getString("usuario","correo@gmail.com"));
-        pass.setText(preferences.getString("contraseña","12345"));
+        txt_username.setText(preferences.getString("usuario",""));
+        pass.setText(preferences.getString("contraseña",""));
     }
     /*public void home(View v){
         if(username != ""){

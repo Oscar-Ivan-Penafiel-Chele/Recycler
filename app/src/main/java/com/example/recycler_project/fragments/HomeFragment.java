@@ -1,6 +1,8 @@
 package com.example.recycler_project.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.recycler_project.HttpsTrustManager;
 import com.example.recycler_project.MapsActivity;
 import com.example.recycler_project.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +36,9 @@ public class HomeFragment extends Fragment {
     Button btn_map;
     Button btn_recycler;
     Button btn_register;
-
+    TextView user;
+    String usuario;
+    RequestQueue requesQueue;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -77,11 +91,44 @@ public class HomeFragment extends Fragment {
         btn_map.setOnClickListener(this::onClick);
         btn_recycler.setOnClickListener(this::onClick);
         btn_register.setOnClickListener(this::onClick);
+        user=root.findViewById(R.id.txt_nombre);
+
+        consulta();
 
         return root;
     }
 
+    public void consulta( ){
+        HttpsTrustManager.allowAllSSL();
+        SharedPreferences preferences= getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+        String b = preferences.getString("usuario","asas");
+
+        String url= "https://192.168.1.4/Sentencias/Consulta.php?usuario="+b;
+        System.out.println(url);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
+            JSONObject jsonObject = null;
+            for(int i=0; i<response.length();i++){
+                try {
+                    jsonObject = response.getJSONObject(i);
+                    user.setText("Bienvenido "+jsonObject.getString("nombre"));
+                    System.out.println(jsonObject.getString("nombre"));
+                }catch (JSONException e){
+                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println(e.getMessage());
+                }
+            }
+        }, (error)->{
+            Toast.makeText(getActivity().getApplicationContext(), "error de Conexion", Toast.LENGTH_SHORT).show();
+        }
+        );
+        requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requesQueue.add(jsonArrayRequest);
+
+    }
+
     public void onClick(View v) {
+
+
         switch (v.getId()){
             case R.id.btn_map:
                 Intent intent_map = new Intent(getActivity(), MapsActivity.class);
