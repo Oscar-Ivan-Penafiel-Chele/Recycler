@@ -54,13 +54,18 @@ public class login extends AppCompatActivity {
                 Request.Method.GET, url, (response) -> { //Logra realizar conexion
                     //Toast.makeText(getApplicationContext(),response, Toast.LENGTH_SHORT).show();
 
+                    String idUsuario;
+                    String[] datoUsuario=response.split("-");
+                    response=datoUsuario[0];
+                    idUsuario=datoUsuario[1];
+            System.out.println(response+" "+idUsuario);
                     if(response.equalsIgnoreCase("Correcto")){ // usuario reciclador  rol=2
-                        guardarPreferencias(usuario, contrasena, response);
+                        guardarPreferencias(usuario, contrasena, response, idUsuario);
                         Intent next = new Intent(this, Navigation.class);
                         startActivity(next);
 
                     }else if (response.equalsIgnoreCase("Admin")){ // usuario administrados  rol=1
-                        guardarPreferencias(usuario, contrasena, response);
+                        guardarPreferencias(usuario, contrasena, response, idUsuario);
                         Intent next = new Intent(this, AdminNavigationActivity.class);
                         startActivity(next);
                     }else if (response.equalsIgnoreCase("Incorrecto")){ // No se encontre la cuenta en la BDD
@@ -76,7 +81,7 @@ public class login extends AppCompatActivity {
 
     }
 
-    public void guardarPreferencias(String usuario, String contraseña, String r){ //guarda datos se sesion
+    public void guardarPreferencias(String usuario, String contraseña, String r, String idUsuario){ //guarda datos se sesion
 
         if(r.equalsIgnoreCase("Correcto")){
             rol=2;
@@ -85,6 +90,7 @@ public class login extends AppCompatActivity {
         }
         SharedPreferences preferences = getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("id",Integer.parseInt(idUsuario));
         editor.putString("usuario", usuario);
         editor.putString("contraseña", contraseña);
         editor.putInt("rol", rol);

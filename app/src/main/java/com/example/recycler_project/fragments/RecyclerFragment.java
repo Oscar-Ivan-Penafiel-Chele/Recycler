@@ -91,15 +91,15 @@ public class RecyclerFragment extends Fragment {
                 break;
             case R.id.btn_paper:
                 id=1;
-                showSelectedFragment(new RegisterProductFragment());
+                showSelectedFragment(new RegisterProductFragment(),id );
                 break;
             case R.id.btn_plastic:
                 id=2;
-                showSelectedFragment(new RegisterProductFragment());
+                showSelectedFragment(new RegisterProductFragment(),id );
                 break;
             case R.id.btn_glass:
                 id=3;
-                showSelectedFragment(new RegisterProductFragment());
+                showSelectedFragment(new RegisterProductFragment(),id );
                 break;
         }
     }
@@ -109,7 +109,10 @@ public class RecyclerFragment extends Fragment {
         frm.popBackStack();
     }
 
-    private void showSelectedFragment (Fragment fragment) {
+    private void showSelectedFragment (Fragment fragment, int id) {
+        Bundle datosMaterial= new Bundle();
+        datosMaterial.putInt("id",id);
+        fragment.setArguments(datosMaterial);
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

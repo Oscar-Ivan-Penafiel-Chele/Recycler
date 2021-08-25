@@ -10,22 +10,23 @@
         $result = mysqli_query($conexion, $sql);
         $row=mysqli_fetch_assoc($result);
         if(mysqli_num_rows($result) != 0){
+            $idusuario=$row["id"];
             $dbusuario=$row["correo"];
             $dbcontraseña=$row["contrasena"];
             $dbrol =$row["rol"];
             if ($dbusuario == $usuario && password_verify($contraseña,$dbcontraseña)) {
                 
                 if($dbrol==2){
-                    $login = "Correcto";
+                    $login = "Correcto-".$idusuario;
                 }elseif($dbrol==1) {
-                    $login = "Admin";
+                    $login = "Admin-".$idusuario;
                 }
             }else{
-                $login = "Incorrecto";    
+                $login = "Incorrecto-0";    
                                   
             }
         }else {
-            $login = "Incorrecto";
+            $login = "Incorrecto-0";
             //echo "No se pudo conectar";
         }
         

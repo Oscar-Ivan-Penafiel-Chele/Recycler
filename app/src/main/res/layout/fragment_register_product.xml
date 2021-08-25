@@ -13,8 +13,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/ic_head"
-            >
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/ic_head">
 
             <Button
                 android:id="@+id/btn_back_pro"
@@ -22,8 +27,9 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:textColor="@color/black"
-                android:background="@drawable/ic_arrow_left"></Button>
+                android:background="@drawable/ic_arrow_left"
+                android:textColor="@color/black"></Button>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
@@ -69,6 +75,7 @@
             android:orientation="vertical"
             android:layout_marginTop="215dp">
             <EditText
+                android:id="@+id/edtDescriptionProduct"
                 android:layout_width="300dp"
                 android:layout_gravity="center"
                 android:layout_height="match_parent"></EditText>
@@ -96,6 +103,7 @@
             android:layout_marginTop="330dp">
 
             <EditText
+                android:id="@+id/edtPeso"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

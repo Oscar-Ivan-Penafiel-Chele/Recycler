@@ -47,8 +47,10 @@ public class register_2 extends AppCompatActivity {
                 if(response.equals("usuario ya existe, coloque otro nombre")){
 
                 }else{
-                Intent next = new Intent(this, login.class);
-                startActivity(next);}
+                    Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_SHORT).show();
+                    Intent next = new Intent(this, login.class);
+                    startActivity(next);
+                }
         }, (error) -> {
             System.out.println(error);
                     Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();

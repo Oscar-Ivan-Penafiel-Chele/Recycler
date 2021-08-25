@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2021 a las 06:56:08
+-- Tiempo de generación: 25-08-2021 a las 07:11:43
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -58,6 +58,18 @@ CREATE TABLE `reciclado` (
   `estado` int(1) NOT NULL COMMENT '1: activo\r\n2: inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `reciclado`
+--
+
+INSERT INTO `reciclado` (`id`, `usuario_id`, `material_id`, `fecha_reciclaje`, `peso_kilogramo`, `precio_total`, `estado`) VALUES
+(1, 1, 2, '2021-08-24', 30, 201, 1),
+(2, 1, 2, '2021-08-25', 0.6, 30, 1),
+(3, 1, 2, '2021-08-25', 0.6, 30, 1),
+(4, 2, 1, '2021-08-25', 0.22, 11, 1),
+(5, 2, 1, '2021-08-25', 0.22, 132, 1),
+(6, 2, 3, '2021-08-25', 55, 27.5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +104,15 @@ CREATE TABLE `usuario` (
   `correo` varchar(60) NOT NULL,
   `contrasena` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `rol`, `nombre`, `apellido`, `telefono`, `correo`, `contrasena`) VALUES
+(1, 2, 'bryan', 'leon', '2197387', 'ssa', '$2y$10$IivOaIoD5M1Eb3bceWNGN.zdPBVuN.OOBzXkRK7nyQGQt4NOy5uLK'),
+(2, 2, 'Adrian', 'Leon', '2197387', 's', '$2y$10$.Ihe/5GK0SYOqt8lZm3VlO1aegJ2ZHwhmGQPLUd3SXU9lSQEg5b2O'),
+(3, 2, 'bryan', 'leon', '2197387', 'b', '$2y$10$NoVkD.W56sDPACPN2IEHgOccG8msOBCzsenVLhwrgoZchvh2oV4YO');
 
 --
 -- Índices para tablas volcadas
@@ -139,7 +160,7 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT de la tabla `reciclado`
 --
 ALTER TABLE `reciclado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -151,7 +172,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
