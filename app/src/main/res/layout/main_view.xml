@@ -7,12 +7,9 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -26,63 +23,82 @@
                 android:layout_marginTop="75dp"
                 android:src="@drawable/logo"></ImageView>
 
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                android:layout_width="130dp"-->
-<!--                android:layout_height="120dp"-->
-<!--                android:src="@drawable/a"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                android:layout_marginTop="35dp">-->
-<!--            </de.hdodenhof.circleimageview.CircleImageView>-->
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"></LinearLayout>
-
-        <Button
-            android:id="@+id/botonIn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="18.7dp"
-            android:layout_marginRight="62dp"
-            android:background="@drawable/blue_fill__rounded_color"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:text="@string/btn_login"
-            android:textColor="#ffffff"
-            android:textSize="12sp"></Button>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/text_o"
-            android:textColor="#aeaeae"
-            android:textSize="10.5sp"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BIENVENIDO A STACK!"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="18.7dp"
-            android:layout_marginRight="62dp"
-            android:background="@drawable/blue_fill__rounded_color"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center"
-            android:onClick="register"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:text="@string/btn_register"
-            android:textColor="#ffffff"
-            android:textSize="12sp"></TextView>
+                    android:gravity="center">
+                </TextView>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/botonIn"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/blue_fill__rounded_color"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/btn_login"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"></Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/text_o"
+                    android:textColor="#aeaeae"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textSize="12dp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/blue_fill__rounded_color"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:onClick="register"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/btn_register"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"></TextView>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -78,6 +78,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:background="@drawable/blue_border_rounded_cornwe"
+                            android:drawableStart="@drawable/ic_bx_user1"
                             android:drawableLeft="@drawable/ic_bx_user1"
                             android:hint="Nombres del Usuario"
                             android:fontFamily="@font/poppins_regular"
@@ -105,6 +106,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:background="@drawable/blue_border_rounded_cornwe"
+                            android:drawableStart="@drawable/ic_bx_user1"
                             android:drawableLeft="@drawable/ic_bx_user1"
                             android:hint="Apellidos del Usuario"
                             android:fontFamily="@font/poppins_regular"
@@ -133,6 +135,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:background="@drawable/blue_border_rounded_cornwe"
+                            android:drawableStart="@drawable/ic_bx_phone"
                             android:drawableLeft="@drawable/ic_bx_phone"
                             android:hint="Teléfono"
                             android:fontFamily="@font/poppins_regular"
@@ -152,7 +155,7 @@
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="300dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_fill__rounded_color"
                         android:fontFamily="@font/poppins_medium"
