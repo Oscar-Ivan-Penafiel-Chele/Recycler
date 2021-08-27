@@ -50,7 +50,7 @@ public class register_2 extends AppCompatActivity {
                 }
 
                 Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_SHORT).show();
-                Intent next = new Intent(this, login.class);
+                Intent next = new Intent(this, MainActivity.class);
                 startActivity(next);
 
         }, (error) -> {
