@@ -1,17 +1,26 @@
 package com.example.recycler_project.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.recycler_project.HttpsTrustManager;
 import com.example.recycler_project.R;
 
 /**
@@ -22,6 +31,8 @@ import com.example.recycler_project.R;
 public class PasswordFragment extends Fragment {
 
     Button btn_conf_pass, back_profile;
+    EditText currentPassword, newPassword,confirmNewPassword;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,30 +77,91 @@ public class PasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_password, container, false);
+
         btn_conf_pass = root.findViewById(R.id.btn_conf_pass);
-        btn_conf_pass.setOnClickListener(this::onClick);
         back_profile = root.findViewById(R.id.btn_back_profile);
-        back_profile.setOnClickListener(this::onClick);
+        currentPassword = root.findViewById(R.id.oldPassword);
+        newPassword = root.findViewById(R.id.newPassword);
+        confirmNewPassword = root.findViewById(R.id.confirmNewPassword);
+
+        newPassword.setEnabled(false);
+        confirmNewPassword.setEnabled(false);
+        btn_conf_pass.setEnabled(false);
+
+        currentPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                boolean isReady = currentPassword.getText().toString().length() > 0 ;
+                btn_conf_pass.setEnabled(isReady);
+                newPassword.setEnabled(isReady);
+                confirmNewPassword.setEnabled(isReady);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+        });
+
+        btn_conf_pass.setOnClickListener(this::savePassword);
+        back_profile.setOnClickListener(this::onBackPress);
 
         return root;
     }
 
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_back_profile:
-                onBackPress();
-                break;
-            case R.id.btn_conf_pass:
-                Toast.makeText(getContext(),"Cambios realizados con éxito",Toast.LENGTH_SHORT).show();
-                showSelectedFragment(new HomeFragment());
-                break;
+    public void savePassword(View v){
+        HttpsTrustManager.allowAllSSL();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+        String contrasenaActual, nuevaContrasena, confirNuevaContrasena;
+        int id,rol;
+
+        contrasenaActual = currentPassword.getText().toString();
+        nuevaContrasena = newPassword.getText().toString();
+        confirNuevaContrasena = confirmNewPassword.getText().toString();
+        id = sharedPreferences.getInt("id",0);
+        rol = sharedPreferences.getInt("rol",0);
+
+        if(contrasenaActual.isEmpty() || nuevaContrasena.isEmpty() || confirNuevaContrasena.isEmpty()){
+            Toast.makeText(getContext(),"Llenar los campos necesarios",Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        if(!nuevaContrasena.equals(confirNuevaContrasena)){
+            Toast.makeText(getContext(),"La contraseña de confirmación no coincide",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String url="https://192.168.1.12/Sentencias/updatePassword.php?id="+id+"&oldPassword="+contrasenaActual+"&newPassword="+nuevaContrasena;
+
+        RequestQueue servicio= Volley.newRequestQueue(getContext());
+        StringRequest respuesta = new StringRequest(
+                Request.Method.GET, url, (response) -> {
+
+            if(response.equals("false")){
+                Toast.makeText(getContext(),"Contraseña Actual no coincide",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Toast.makeText(getContext(), "Contraseña actualizada con éxito!",Toast.LENGTH_SHORT).show();
+            if(rol == 2){
+                showSelectedFragment(new HomeFragment());
+            }else{
+                showSelectedFragment(new AdminHomeFragment());
+            }
+
+        }, (error) -> {
+            System.out.println(error);
+            Toast.makeText(getContext(),"Sin conexión a internet", Toast.LENGTH_SHORT).show();
+        });
+        servicio.add(respuesta);
     }
 
-    public void onBackPress(){
+    public void onBackPress(View v){
         FragmentManager frm = getActivity().getSupportFragmentManager();
         frm.popBackStack();
     }
+
     private void showSelectedFragment (Fragment fragment) {
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)

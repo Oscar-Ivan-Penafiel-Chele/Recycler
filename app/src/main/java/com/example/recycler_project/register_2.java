@@ -1,13 +1,15 @@
 package com.example.recycler_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.android.volley.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -41,14 +43,16 @@ public class register_2 extends AppCompatActivity {
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {
 
-                Toast.makeText(getApplicationContext(),response, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),response, Toast.LENGTH_SHORT).show();
                 if(response.equals("usuario ya existe, coloque otro nombre")){
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_SHORT).show();
-                    Intent next = new Intent(this, login.class);
-                    startActivity(next);
+                    Toast.makeText(getApplicationContext(),"El usuario ya existe",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_SHORT).show();
+                Intent next = new Intent(this, login.class);
+                startActivity(next);
+
         }, (error) -> {
             System.out.println(error);
                     Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();

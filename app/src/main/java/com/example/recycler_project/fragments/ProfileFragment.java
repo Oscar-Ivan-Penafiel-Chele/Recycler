@@ -14,8 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.recycler_project.HttpsTrustManager;
 import com.example.recycler_project.R;
@@ -139,11 +141,14 @@ public class ProfileFragment extends Fragment {
         cellphone.setEnabled(true);
         btn_save.setEnabled(true);
     }
+
     public void save (View v){
+        HttpsTrustManager.allowAllSSL();
         String name, apellido, correo, telefono;
-        int id;
+        int id,rol;
         SharedPreferences sh = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
         id = sh.getInt("id",0);
+        rol = sh.getInt("rol",0);
 
         name = userName.getText().toString();
         apellido = lastName.getText().toString();
@@ -155,11 +160,29 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/Login.php?id="+id+"&name="+name+"&lastName="+apellido+"&email="+email+"&cellphone="+cellphone;
+        String url="https://192.168.1.12/Sentencias/updateUser.php?id="+id+"&name="+name+"&lastName="+apellido+"&email="+correo+"&cellphone="+telefono;
+        RequestQueue servicio= Volley.newRequestQueue(getContext());
+        StringRequest respuesta = new StringRequest(
+                Request.Method.GET, url, (response) -> {
 
+            if(response.equals("false")){
+                Toast.makeText(getContext(),"Error al actualizar los datos",Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        Toast.makeText(getContext(), "Datos actualizados con éxito!",Toast.LENGTH_SHORT).show();
-        //showSelectedFragment(new HomeFragment());
+            Toast.makeText(getContext(), "Datos actualizados con éxito!",Toast.LENGTH_SHORT).show();
+            if(rol == 2){
+                showSelectedFragment(new HomeFragment());
+            }else{
+                showSelectedFragment(new AdminHomeFragment());
+            }
+
+        }, (error) -> {
+            System.out.println(error);
+            Toast.makeText(getContext(),"Sin conexión a internet", Toast.LENGTH_SHORT).show();
+        });
+        servicio.add(respuesta);
+
     }
 
     public void onBackPress(View v){
