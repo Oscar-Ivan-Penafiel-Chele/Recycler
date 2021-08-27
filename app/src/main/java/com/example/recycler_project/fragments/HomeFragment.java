@@ -100,9 +100,9 @@ public class HomeFragment extends Fragment {
     public void consulta( ){
         HttpsTrustManager.allowAllSSL();
         SharedPreferences preferences= getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
-        String b = preferences.getString("usuario","asas");
+        int id = preferences.getInt("id",0);
 
-        String url= "https://192.168.1.12/Sentencias/Consulta.php?usuario="+b;
+        String url= "https://192.168.1.12/Sentencias/Consulta.php?id="+id;
         System.out.println(url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;

@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.recycler_project.MapsActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.recycler_project.R;
-import com.example.recycler_project.login;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -118,7 +115,7 @@ public class SettingFragment extends Fragment {
             case R.id.img_out:
                 SharedPreferences preferences= getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
                 preferences.edit().clear().commit();
-                Intent login = new Intent(getActivity(), com.example.recycler_project.login.class);
+                Intent login = new Intent(getActivity(), com.example.recycler_project.MainActivity.class);
                 startActivity(login);
                 break;
         }

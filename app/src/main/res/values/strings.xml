@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App de reciclaje Chele</string>
+    <string name="app_name">Stack</string>
     <string name="btn_login">Ingresar</string>
     <string name="btn_register">Crear Cuenta</string>
     <string name="text_o">Or</string>
