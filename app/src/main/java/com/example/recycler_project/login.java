@@ -21,7 +21,6 @@ public class login extends AppCompatActivity {
     EditText txt_username, pass;
     Button btn_login;
     String username;
-    int rol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +31,13 @@ public class login extends AppCompatActivity {
         username = txt_username.getText().toString();
         pass = (EditText) findViewById(R.id.pass);
         btn_login = (Button) findViewById(R.id.btn_login);
-        recuperarPreferencias(); //
+        recuperarPreferencias();
     }
     public void login(View view){
         HttpsTrustManager.allowAllSSL(); //PErmite conexion incluso si expiro el ssl de la pagina (Página no segura)
         String usuario = txt_username.getText().toString();
         String contrasena = pass.getText().toString();
+
         if(usuario.equals("") || contrasena.equals("")){
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             return;
@@ -58,7 +58,7 @@ public class login extends AppCompatActivity {
                         startActivity(next);
                     }else if (response.equalsIgnoreCase("Admin")){ // usuario administrados  rol=1
                         guardarPreferencias(usuario, contrasena, response, idUsuario);
-                        Intent next = new Intent(this, AdminNavigationActivity.class);
+                        Intent next = new Intent(this, NavigationAdmin.class);
                         startActivity(next);
                     }else if (response.equalsIgnoreCase("Incorrecto")){ // No se encontre la cuenta en la BDD
                         Toast.makeText(this, "Usuario o contraseña invalidos", Toast.LENGTH_SHORT).show();
@@ -71,13 +71,16 @@ public class login extends AppCompatActivity {
     }
 
     public void guardarPreferencias(String usuario, String contraseña, String r, String idUsuario){ //guarda datos se sesion
+        int rol = 0;
 
         if(r.equalsIgnoreCase("Correcto")){
             rol=2;
         }else if(r.equalsIgnoreCase("Admin")){
             rol=1;
         }
+
         SharedPreferences preferences = getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("id",Integer.parseInt(idUsuario));
         editor.putString("usuario", usuario);

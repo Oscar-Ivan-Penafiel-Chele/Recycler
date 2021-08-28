@@ -34,7 +34,6 @@ public class ProfileFragment extends Fragment {
 
     Button btn_save, btn_back, btnEditEnable;
     EditText userName, lastName, email, cellphone;
-    int id;
     RequestQueue requesQueue;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -107,11 +106,12 @@ public class ProfileFragment extends Fragment {
     }
 
     public void getDataUser(){
+        int idUser;
         HttpsTrustManager.allowAllSSL();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
+        idUser = sharedPreferences.getInt("id",0);
 
-        String url= "https://192.168.1.12/Sentencias/Consulta.php?id="+id;
+        String url= "https://192.168.1.12/Sentencias/Consulta.php?id="+idUser;
         System.out.println(url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
@@ -145,10 +145,10 @@ public class ProfileFragment extends Fragment {
     public void save (View v){
         HttpsTrustManager.allowAllSSL();
         String name, apellido, correo, telefono;
-        int id,rol;
-        SharedPreferences sh = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
-        id = sh.getInt("id",0);
-        rol = sh.getInt("rol",0);
+        int idUser,rol;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
+        idUser = sharedPreferences.getInt("id",0);
+        rol = sharedPreferences.getInt("rol",0);
 
         name = userName.getText().toString();
         apellido = lastName.getText().toString();
@@ -160,7 +160,7 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/updateUser.php?id="+id+"&name="+name+"&lastName="+apellido+"&email="+correo+"&cellphone="+telefono;
+        String url="https://192.168.1.12/Sentencias/updateUser.php?id="+idUser+"&name="+name+"&lastName="+apellido+"&email="+correo+"&cellphone="+telefono;
         RequestQueue servicio= Volley.newRequestQueue(getContext());
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {
@@ -191,11 +191,23 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showSelectedFragment (Fragment fragment) {
+        int rol;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
+        rol = sharedPreferences.getInt("rol",0);
+
         if(fragment != null){
-            getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit();
+            if(rol == 2){
+                getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }else if(rol == 1) {
+                getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
         }
     }
 }

@@ -27,6 +27,7 @@ public class SettingFragment extends Fragment {
     Button btn_back, btn_password;
     TextView txt_pass,txt_help,txt_info,txt_out;
     ImageView img_key,img_help,img_info,img_out;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -125,12 +126,24 @@ public class SettingFragment extends Fragment {
         FragmentManager frm = getActivity().getSupportFragmentManager();
         frm.popBackStack();
     }
+
     private void showSelectedFragment (Fragment fragment) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
+        int rol = sharedPreferences.getInt("rol",0);
+
         if(fragment != null){
-            getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit();
+            if(rol == 2){
+                getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }else if(rol == 1) {
+                getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
         }
     }
 

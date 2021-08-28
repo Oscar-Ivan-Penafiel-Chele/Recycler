@@ -1,14 +1,13 @@
 package com.example.recycler_project.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recycler_project.R;
 
@@ -79,7 +78,7 @@ public class AdminHomeFragment extends Fragment {
     }
     private void showSelectedFragment (Fragment fragment) {
         if(fragment != null){
-            getFragmentManager().beginTransaction().replace(R.id.nav_cont_admin,fragment)
+            getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .addToBackStack(null)
                     .commit();

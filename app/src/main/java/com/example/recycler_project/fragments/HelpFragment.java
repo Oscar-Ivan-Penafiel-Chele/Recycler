@@ -1,16 +1,16 @@
 package com.example.recycler_project.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.recycler_project.R;
 
@@ -22,6 +22,7 @@ import com.example.recycler_project.R;
 public class HelpFragment extends Fragment {
 
     TextView btn_back_help, btn_problems, btn_politi;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -92,11 +93,22 @@ public class HelpFragment extends Fragment {
     }
 
     private void showSelectedFragment (Fragment fragment) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+        int rol = sharedPreferences.getInt("rol",0);
+
         if(fragment != null){
-            getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit();
+            if(rol == 1) {
+                getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }else if(rol == 2){
+                getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
         }
     }
 }

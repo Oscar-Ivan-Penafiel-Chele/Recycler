@@ -12,35 +12,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.recycler_project.fragments.HomeFragment;
+import com.example.recycler_project.fragments.AdminHomeFragment;
 import com.example.recycler_project.fragments.ProfileFragment;
 import com.example.recycler_project.fragments.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Navigation extends AppCompatActivity {
+public class NavigationAdmin extends AppCompatActivity {
 
-    BottomNavigationView navigation;
+    BottomNavigationView navigationAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+        setContentView(R.layout.activity_navigation_admin);
 
-        showSelectedFragment(new HomeFragment());
-        navigation = (BottomNavigationView) findViewById(R.id.menu_navigation);
+        showSelectedFragment(new AdminHomeFragment());
+        navigationAdmin = (BottomNavigationView) findViewById(R.id.menuNavigationAdmin);
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        navigationAdmin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                if (item.getItemId() == R.id.menu_home){
-                    showSelectedFragment(new HomeFragment());
+                if (item.getItemId() == R.id.menuHomeAdmin){
+                    showSelectedFragment(new AdminHomeFragment());
                 }
-                if (item.getItemId() == R.id.menu_settings){
+                if (item.getItemId() == R.id.menuSettingsAdmin){
                     showSelectedFragment(new SettingFragment());
                 }
-                if (item.getItemId() == R.id.menu_profile){
+                if (item.getItemId() == R.id.menuProfileAdmin){
                     showSelectedFragment(new ProfileFragment());
                 }
 
@@ -76,7 +76,7 @@ public class Navigation extends AppCompatActivity {
 
     private void showSelectedFragment (Fragment fragment) {
         if(fragment != null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
+            getSupportFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .addToBackStack(null)
                     .commit();

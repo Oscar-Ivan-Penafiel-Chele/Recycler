@@ -112,15 +112,14 @@ public class PasswordFragment extends Fragment {
 
     public void savePassword(View v){
         HttpsTrustManager.allowAllSSL();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
         String contrasenaActual, nuevaContrasena, confirNuevaContrasena;
-        int id,rol;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
 
         contrasenaActual = currentPassword.getText().toString();
         nuevaContrasena = newPassword.getText().toString();
         confirNuevaContrasena = confirmNewPassword.getText().toString();
-        id = sharedPreferences.getInt("id",0);
-        rol = sharedPreferences.getInt("rol",0);
+        int id = sharedPreferences.getInt("id",0);
+        int rol = sharedPreferences.getInt("rol",0);
 
         if(contrasenaActual.isEmpty() || nuevaContrasena.isEmpty() || confirNuevaContrasena.isEmpty()){
             Toast.makeText(getContext(),"Llenar los campos necesarios",Toast.LENGTH_SHORT).show();
@@ -146,7 +145,7 @@ public class PasswordFragment extends Fragment {
             Toast.makeText(getContext(), "Contraseña actualizada con éxito!",Toast.LENGTH_SHORT).show();
             if(rol == 2){
                 showSelectedFragment(new HomeFragment());
-            }else{
+            }else if(rol == 1){
                 showSelectedFragment(new AdminHomeFragment());
             }
 
@@ -163,11 +162,21 @@ public class PasswordFragment extends Fragment {
     }
 
     private void showSelectedFragment (Fragment fragment) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+        int rol = sharedPreferences.getInt("rol",0);
         if(fragment != null){
-            getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit();
+            if(rol == 1){
+                getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }else if (rol == 2){
+                getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
         }
     }
 }
