@@ -38,6 +38,9 @@ public class HomeFragment extends Fragment {
     TextView user;
     String usuario;
     RequestQueue requesQueue;
+    private SharedPreferences sharedPreferences;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -117,7 +120,7 @@ public class HomeFragment extends Fragment {
                 }
             }
         }, (error)->{
-            Toast.makeText(getActivity().getApplicationContext(), "error de Conexion", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
         }
         );
         requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -150,4 +153,5 @@ public class HomeFragment extends Fragment {
                     .commit();
         }
     }
+
 }

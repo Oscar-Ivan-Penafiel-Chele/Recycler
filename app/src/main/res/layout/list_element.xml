@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp">
+            <ImageView
+                android:id="@+id/iconImageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:src="@drawable/ic_icons8_google_maps"
+                android:layout_alignParentLeft="true"></ImageView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/iconImageView"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/iconImageView">
+
+                <TextView
+                    android:id="@+id/addressNameTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Dirección"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/addressName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp">
+                </TextView>
+            </LinearLayout>
+            <Button
+                android:id="@+id/deleteAddress"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_btn_delete"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"></Button>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

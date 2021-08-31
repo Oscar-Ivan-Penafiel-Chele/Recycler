@@ -55,7 +55,7 @@ public class register_2 extends AppCompatActivity {
 
         }, (error) -> {
             System.out.println(error);
-                    Toast.makeText(getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Sin conexión", Toast.LENGTH_SHORT).show();
         });
         servicio.add(respuesta);
 

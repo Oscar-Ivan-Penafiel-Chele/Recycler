@@ -1,7 +1,5 @@
 package com.example.recycler_project.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.recycler_project.R;
-import com.example.recycler_project.*;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +26,8 @@ public class RegisterProductFragment extends Fragment {
     EditText descripcion, peso;
     Button btn_back, btn_save;
     Double pesoxKilo, total, pesoR;
+    ArrayList <Hashtable> products = new ArrayList();
+    int sizeArray = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,8 +74,8 @@ public class RegisterProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_register_product, container, false);
         btn_back = root.findViewById(R.id.btn_back_pro);
-        descripcion=(EditText)root.findViewById(R.id.edtDescriptionProduct);
-        peso=(EditText)root.findViewById(R.id.edtPeso);
+        descripcion= root.findViewById(R.id.edtDescriptionProduct);
+        peso = root.findViewById(R.id.edtPeso);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,8 +88,9 @@ public class RegisterProductFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(),"Registrado con éxito",Toast.LENGTH_SHORT).show();
-                obtenerDatosM();
-                showSelectedFragment(new HomeFragment());
+//                obtenerDatosM();
+                registerProduct();
+                //showSelectedFragment(new HomeFragment());
             }
         });
 
@@ -107,6 +102,7 @@ public class RegisterProductFragment extends Fragment {
         FragmentManager frm = getActivity().getSupportFragmentManager();
         frm.popBackStack();
     }
+
     private void showSelectedFragment (Fragment fragment) {
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.container_nav,fragment)
@@ -116,65 +112,14 @@ public class RegisterProductFragment extends Fragment {
         }
     }
 
-    public void obtenerDatosM(){
-        double pesoM;
-        pesoM=Double.parseDouble(peso.getText().toString());
+    private void registerProduct(){
+        Hashtable product = new Hashtable();
+        product.put("Description",descripcion.getText().toString());
+        product.put("Weight",peso.getText().toString());
 
-        HttpsTrustManager.allowAllSSL();
-        Bundle datosMaterial= getArguments();
-        if (datosMaterial == null) {
-            // No hay datos, manejar excepción
-            return;
-        }
-        int id=datosMaterial.getInt("id");
-        System.out.println(id);
-        String url ="https://192.168.1.12/Sentencias/Consulta_Material.php?idMaterial="+id;
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
-            JSONObject jsonObject = null;
-            for(int i=0; i<response.length();i++){
-                try {
-                    jsonObject = response.getJSONObject(i);
-                    pesoxKilo=Double.parseDouble(jsonObject.getString("precio_x_kilo"));
-                    total=CalculoTotal(pesoxKilo, pesoM);
-                    pesoR= Double.parseDouble(peso.getText().toString());
-                    System.out.println(total);
-                    SharedPreferences preferences = this.getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
-                    System.out.println("el id del usuario es: "+preferences.getInt("id",0));
-                    RegistroReciclado(preferences.getInt("id",0), id, pesoR, total);
+        products.add(sizeArray,product);
+        sizeArray ++;
 
-                }catch (JSONException e){
-                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    System.out.println(e.getMessage());
-                }
-            }
-        }, (error)->{
-            Toast.makeText(getActivity().getApplicationContext(), "error de Conexion", Toast.LENGTH_SHORT).show();
-        }
-        );
-        RequestQueue requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        requesQueue.add(jsonArrayRequest);
-        //Calcular precio aproximado
-    }
-
-    public double CalculoTotal(double pesoxKilo, double precio){
-        double precioTotal=0;
-        precioTotal=pesoxKilo*precio;
-        return precioTotal;
-    }
-
-    public void RegistroReciclado(int idUsuario, int idMaterial, double pesoKilo, double precioTotal){
-        HttpsTrustManager.allowAllSSL();
-        String url="https://192.168.1.4/Sentencias/RegistroMaterial.php?idUsuario="+idUsuario+"&idMaterial="+idMaterial+"&" +
-                "peso="+pesoKilo+"&precioTotal="+precioTotal;
-        System.out.println(url);
-        RequestQueue servicio = Volley.newRequestQueue(this.getActivity());
-        StringRequest respuesta = new StringRequest(
-                Request.Method.GET, url, (response) -> {
-                    Toast.makeText(getActivity().getApplicationContext(),"Material registrado exitosamente", Toast.LENGTH_SHORT).show();
-                }, (error) -> {
-                    System.out.println(error);
-                    Toast.makeText(getActivity().getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
-                });
-        servicio.add(respuesta);
+        System.out.println(products);
     }
 }

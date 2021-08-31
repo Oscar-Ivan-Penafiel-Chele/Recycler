@@ -114,7 +114,9 @@ public class SettingFragment extends Fragment {
                 break;
             case R.id.txt_out:
             case R.id.img_out:
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("locationRecicler",Context.MODE_PRIVATE);
                 SharedPreferences preferences= getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
                 preferences.edit().clear().commit();
                 Intent login = new Intent(getActivity(), com.example.recycler_project.MainActivity.class);
                 startActivity(login);

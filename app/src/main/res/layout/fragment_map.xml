@@ -40,19 +40,8 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edit_search"
-                android:layout_width="290dp"
-                android:layout_height="40dp"
-                android:hint="Seleeccione Recicladora"
-                android:paddingLeft="15dp"
-                android:background="@drawable/ic_rectangle_13"></EditText>
-            <Button
-                android:id="@+id/btn_search"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/ic_check_circle"></Button>
+
+
         </LinearLayout>
 
         <LinearLayout

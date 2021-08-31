@@ -17,7 +17,7 @@ import com.example.recycler_project.R;
  * create an instance of this fragment.
  */
 public class AdminHomeFragment extends Fragment {
-    Button reciclador, registro;
+    Button mapAdmin, requestUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,18 +64,28 @@ public class AdminHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_admin_home, container, false);
-        reciclador=root.findViewById(R.id.btn_recyclera);
-        registro=root.findViewById(R.id.btn_registera);
+        mapAdmin=root.findViewById(R.id.mapAdmin);
+        requestUser=root.findViewById(R.id.requestUser);
 
-        reciclador.setOnClickListener(this::onClick);
-        registro.setOnClickListener(this::onClick);
+        mapAdmin.setOnClickListener(this::onClick);
+        requestUser.setOnClickListener(this::onClick);
+
+
         return root;
 
     }
 
-    public void onClick(View v) {
-
+    private void onClick(View v) {
+        switch (v.getId()){
+            case R.id.mapAdmin:
+                showSelectedFragment(new AdminMapFragment());
+                break;
+            case R.id.requestUser:
+                showSelectedFragment(new AdminRequestFragment());
+                break;
+        }
     }
+
     private void showSelectedFragment (Fragment fragment) {
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.navigationAdmin,fragment)

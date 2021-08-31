@@ -6,9 +6,10 @@
     tools:context=".fragments.AdminHomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,16 +22,16 @@
                 android:layout_marginTop="3dp"
                 android:background="@drawable/icon_app"></TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_marginTop="125dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:layout_marginTop="40dp"
+            android:gravity="center">
 
             <Button
-                android:id="@+id/btn_recyclera"
+                android:id="@+id/mapAdmin"
                 android:layout_width="135dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
@@ -38,19 +39,18 @@
                 android:background="@drawable/ic_bx_mapa"
                 android:gravity="center"></Button>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_marginTop="300dp"
+
             android:gravity="center">
             <Button
-                android:id="@+id/btn_registera"
+                android:id="@+id/requestUser"
                 android:layout_width="135dp"
                 android:layout_height="140dp"
                 android:background="@drawable/ic_group_12"
                 ></Button>
         </LinearLayout>
-
-    </RelativeLayout>
-
+    </LinearLayout>
 </FrameLayout>

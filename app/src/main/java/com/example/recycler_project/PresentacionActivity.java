@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.security.Principal;
 
 public class PresentacionActivity extends AppCompatActivity {
     //ProgressBar progressBar;
@@ -28,10 +24,19 @@ public class PresentacionActivity extends AppCompatActivity {
 
                 SharedPreferences preferences=getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
                 boolean sesion=preferences.getBoolean("sesion",false);
+                int rol = preferences.getInt("rol",0);
+
                 if(sesion){ //Si alguien inicio sesion y no la ha cerrado se abre la actiity de navegacion
-                    Intent intent = new Intent(getApplicationContext(), Navigation.class);
-                    startActivity(intent);
-                    finish();
+                    if(rol == 2){
+                        Intent intent = new Intent(getApplicationContext(), Navigation.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(rol == 1){
+                        Intent intent = new Intent(getApplicationContext(), NavigationAdmin.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }else{ //Si no hay sesion iniciada se abre MainActivity
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
