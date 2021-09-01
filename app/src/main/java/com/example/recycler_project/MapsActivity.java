@@ -227,17 +227,17 @@ public class MapsActivity extends FragmentActivity implements
                         spinnerLocation.setAdapter(adapter);
 
                     } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         System.out.println("No se pudo "+ e.getMessage());
                         // No encontro la ubicacion
                     }
 
                 }catch (JSONException e){
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, (error)->{
-            Toast.makeText(getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MapsActivity.this, "Error de Conexion", Toast.LENGTH_SHORT).show();
         }
         );
         requesQueue = Volley.newRequestQueue(getApplicationContext());
@@ -278,7 +278,7 @@ public class MapsActivity extends FragmentActivity implements
     private void saveLocation(int position){
         final Hashtable[] hash = {new Hashtable()};
         sharedPreferences = getSharedPreferences("locationRecicler", Context.MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+        //sharedPreferences.edit().clear().commit();
         String location = "";
         location = spinnerLocation.getItemAtPosition(position).toString();
 
@@ -288,18 +288,26 @@ public class MapsActivity extends FragmentActivity implements
 
         builderDialog.setTitle("¿Desea seleccionar la ubicación?");
         builderDialog.setMessage("Usted a seleccionado: "+location);
+        builderDialog.setIcon(R.drawable.ic_icons8_google_maps_1_);
 
         String finalLocation = location;
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                int id = 0;
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 for (int i = 0; i < arrayLocationsAuxiliar.size() ; i++){
                         hash[0] = arrayLocationsAuxiliar.get(i);
                         if(hash[0].get("addressName") == finalLocation){
-                            editor.putInt("idLocation",Integer.parseInt(hash[0].get("id_recicladora").toString()));
+                            id = Integer.parseInt(hash[0].get("id_recicladora").toString());
+                            editor.putInt("idLocation",id);
                             editor.commit();
+
+                            if(!editor.commit()){
+                                Toast.makeText(MapsActivity.this,"Error en guardar selección",Toast.LENGTH_LONG).show();
+                                return;
+                            }
                             Toast.makeText(MapsActivity.this,"Ubicación seleccionada con éxito",Toast.LENGTH_LONG).show();
                         }
                 }

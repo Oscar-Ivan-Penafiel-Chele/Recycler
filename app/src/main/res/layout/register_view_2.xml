@@ -112,14 +112,14 @@
                             android:background="@drawable/blue_border_rounded_cornwe"
                             android:drawableStart="@drawable/ic_bx_key"
                             android:drawableLeft="@drawable/ic_bx_key"
-                            android:hint="Contraseña"
-                            android:fontFamily="@font/poppins_regular"
-                            android:inputType="textEmailAddress"
-                            android:paddingLeft="20dp"
-                            android:textSize="15dp"
                             android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Contraseña"
+                            android:inputType="textPassword"
+                            android:paddingLeft="20dp"
                             android:paddingTop="10dp"
-                            android:paddingBottom="10dp"></EditText>
+                            android:paddingBottom="10dp"
+                            android:textSize="15dp"></EditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 

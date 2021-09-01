@@ -108,7 +108,7 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:textSize="15dp"
-                            android:hint="2. Peso (kg)"
+                            android:hint="2. Peso (gr)"
                             android:drawablePadding="10dp"
                             android:background="@drawable/ic_rectangle_13"
                             android:inputType="number"></EditText>
