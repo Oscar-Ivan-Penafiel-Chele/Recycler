@@ -90,12 +90,6 @@ public class AdminMapFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        contextFragment = context;
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -106,7 +100,6 @@ public class AdminMapFragment extends Fragment {
         search = root.findViewById(R.id.searchIcon);
         recyclerViewAddress = root.findViewById(R.id.reciclerView);
         searchReference = root.findViewById(R.id.searchReference); //EditText Buscar...
-
 
         addReferenceMap.setOnClickListener(this::addReference);
         search.setOnClickListener(this::searchReferenceMap);
@@ -163,7 +156,6 @@ public class AdminMapFragment extends Fragment {
                     try {
                         address = geocoder.getFromLocation(latitud[0],longitud[0],maxResultados);
                         direccion[0] = address.get(0).getAddressLine(0);
-
                         addElementsRecyclerView(idAddress[0], direccion[0]);
                     } catch (Exception e) {
                        // No encontro la ubicacion
@@ -182,13 +174,13 @@ public class AdminMapFragment extends Fragment {
     }
 
     public void addElementsRecyclerView(int idAddress, String direccion){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        elements.add(new ListElements(1,"direccion"));
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        recyclerViewAddress.setLayoutManager(linearLayoutManager);
-        recyclerViewAddress.setHasFixedSize(true);
-        listAdapter = new ListAdapter(getContext(),elements);
-        recyclerViewAddress.setAdapter(listAdapter);
+        try {
+            elements.add(new ListElements(idAddress,direccion));
+            recyclerViewAddress.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+            recyclerViewAddress.setHasFixedSize(true);
+            recyclerViewAddress.setAdapter(new ListAdapter(getContext(),elements));
+        }catch (Exception e){
+            System.out.println("Error : "+e.getMessage());
+        }
     }
 }

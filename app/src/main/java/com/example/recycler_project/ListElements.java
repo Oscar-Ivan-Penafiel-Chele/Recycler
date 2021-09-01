@@ -1,13 +1,12 @@
 package com.example.recycler_project;
 
 public class ListElements {
-    int id;
+    int idAddress;
     String addressName;
 
-    public ListElements(int id, String address) {
-        this.id = id;
+    public ListElements(int idAddress, String address) {
+        this.idAddress = idAddress;
         this.addressName = address;
-
     }
 
     public String getAddress() {
@@ -18,11 +17,11 @@ public class ListElements {
         this.addressName = address;
     }
 
-    public int getId() {
-        return id;
+    public int getIdAddress() {
+        return idAddress;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 }
