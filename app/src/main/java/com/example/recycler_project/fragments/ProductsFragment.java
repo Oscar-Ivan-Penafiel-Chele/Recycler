@@ -15,13 +15,24 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.recycler_project.HttpsTrustManager;
+import com.example.recycler_project.ListAdapterProduct;
+import com.example.recycler_project.ListProducts;
 import com.example.recycler_project.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,11 +41,14 @@ import com.example.recycler_project.R;
  */
 public class ProductsFragment extends Fragment {
 
-    Button btn_new, btn_search, btn_edit, btn_delete, btn_save, btn_back;
+    Button btn_new, btn_search, btn_save, btn_back;
     EditText txt_search;
     private SharedPreferences sharedPreferences;
     private AlertDialog alertDialog;
+    RequestQueue requesQueue;
     AlertDialog.Builder builderDialog;
+    List<ListProducts> products = new ArrayList<>();
+    RecyclerView recyclerViewProduct;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,19 +97,16 @@ public class ProductsFragment extends Fragment {
         builderDialog = new AlertDialog.Builder(getActivity());
         btn_new = root.findViewById(R.id.btn_add);
         btn_back = root.findViewById(R.id.btn_back_products);
-        btn_edit = root.findViewById(R.id.btn_edit);
-        btn_delete = root.findViewById(R.id.btn_delete);
         btn_save = root.findViewById(R.id.btn_save_product);
         txt_search = root.findViewById(R.id.edit_search);
         btn_search = root.findViewById(R.id.btn_search);
+        recyclerViewProduct = root.findViewById(R.id.reciclerViewProducts);
 
         btn_new.setOnClickListener(this::onClick);
         btn_back.setOnClickListener(this::onClick);
-        btn_edit.setOnClickListener(this::onClick);
-        btn_delete.setOnClickListener(this::onClick);
         btn_save.setOnClickListener(this::onClick);
         btn_search.setOnClickListener(this::onClick);
-
+        getAllProducts();
         return root;
     }
 
@@ -107,12 +118,9 @@ public class ProductsFragment extends Fragment {
             case R.id.btn_add:
                 showSelectedFragment(new RecyclerFragment());
                 break;
-            case R.id.btn_edit:
-                showSelectedFragment(new EditProductFragment());
-                break;
             case R.id.btn_save_product:
                 generateRequest();
-                showSelectedFragment(new HomeFragment());
+
                 break;
             case R.id.btn_search:
 
@@ -134,6 +142,65 @@ public class ProductsFragment extends Fragment {
         }
     }
 
+    private void getAllProducts(){
+        HttpsTrustManager.allowAllSSL();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+        int idUser = sharedPreferences.getInt("id",0);
+        final String[] description = new String[1];
+        final double[] weight = new double[1];
+        final int[] idProduct = new int[1];
+        final int[] idMaterial = new int[1];
+
+        String url= "https://192.168.1.12/Sentencias/getProductsRecycler.php?id="+idUser;
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
+            JSONObject jsonObject = null;
+            for(int i=0; i<response.length();i++){
+                try {
+                    jsonObject = response.getJSONObject(i);
+                    idProduct[0] = jsonObject.getInt("id");
+                    idMaterial[0] = jsonObject.getInt("material_id");
+                    description[0] = jsonObject.getString("descripcion_reciclaje");
+                    weight[0] = jsonObject.getDouble("peso_kilogramo");
+
+                    try {
+                        addProductsRecyclerView(idProduct[0], idMaterial[0], description[0], weight[0]);
+                    } catch (Exception e) {
+                        // No encontro la ubicacion
+                    }
+
+                }catch (JSONException e){
+                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, (error)->{
+            Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+        }
+        );
+        requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requesQueue.add(jsonArrayRequest);
+    }
+
+    public void addProductsRecyclerView(int idProduct, int idMaterial , String descripcion , double peso){
+        final int imageProduct;
+
+        if(idMaterial == 1){
+            imageProduct = R.drawable.ic_button_paper;
+        }else if (idMaterial == 2){
+            imageProduct = R.drawable.ic_button_plastic;
+        }else if (idMaterial == 3){
+            imageProduct = R.drawable.ic_button_glass;
+        }else {
+            imageProduct = 0;
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        products.add(new ListProducts(idProduct, imageProduct, descripcion, peso ));
+        recyclerViewProduct.setLayoutManager(linearLayoutManager);
+        recyclerViewProduct.setHasFixedSize(true);
+        recyclerViewProduct.setAdapter(new ListAdapterProduct(products, getContext()));
+    }
+
     private void generateRequest(){
         HttpsTrustManager.allowAllSSL();
         sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
@@ -142,8 +209,6 @@ public class ProductsFragment extends Fragment {
         builderDialog.setTitle("¿Estás seguro de confirmar la petición?");
         builderDialog.setMessage("Al confirmar realizará la petición de reciclaje");
         builderDialog.setIcon(R.drawable.ic_logo_recycle);
-
-
 
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
@@ -158,6 +223,7 @@ public class ProductsFragment extends Fragment {
                         return;
                     }
                     Toast.makeText(getContext(), "Petición realizada con éxito",Toast.LENGTH_SHORT).show();
+                    showSelectedFragment(new HomeFragment());
 
                 }, (error) -> {
                     System.out.println(error);

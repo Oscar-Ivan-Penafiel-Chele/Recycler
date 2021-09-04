@@ -1,6 +1,5 @@
 package com.example.recycler_project.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,8 +45,6 @@ public class AdminMapFragment extends Fragment {
     private List<Address> address;
     List<ListElements> elements = new ArrayList<>();
     RecyclerView recyclerViewAddress ;
-    Context contextFragment;
-    ListAdapter listAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

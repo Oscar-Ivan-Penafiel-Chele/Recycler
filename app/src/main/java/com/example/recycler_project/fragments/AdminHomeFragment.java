@@ -94,7 +94,4 @@ public class AdminHomeFragment extends Fragment {
                     .commit();
         }
     }
-
-
-
 }

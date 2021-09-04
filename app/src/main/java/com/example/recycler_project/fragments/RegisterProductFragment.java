@@ -132,6 +132,7 @@ public class RegisterProductFragment extends Fragment {
             // No hay datos, manejar excepción
             return;
         }
+
         int id=datosMaterial.getInt("id");
 
         String url ="https://192.168.1.12/Sentencias/Consulta_Material.php?idMaterial="+id;
@@ -172,6 +173,7 @@ public class RegisterProductFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("locationRecicler",Context.MODE_PRIVATE);
         int idLocation = sharedPreferences.getInt("idLocation",0);
         String descriptionMaterial = descripcion.getText().toString();
+        descriptionMaterial.replace(" ","+");
         
         String url="https://192.168.1.12/Sentencias/RegistroMaterial.php?idUsuario="+idUsuario+"&idMaterial="+idMaterial+"&idRecicladora="+idLocation+"&descripcionReciclaje="+descriptionMaterial+"&peso="+pesoKilo+"&precioTotal="+precioTotal;
         System.out.println(url);

@@ -68,17 +68,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
+                        app:errorEnabled="true"
                         app:endIconMode="clear_text">
 
                         <EditText
                             android:id="@+id/username_input"
                             android:layout_width="300dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/blue_border_rounded_cornwe"
                             android:drawableStart="@drawable/ic_bx_envelope"
@@ -89,36 +91,44 @@
                             android:paddingLeft="20dp"
                             android:textSize="15dp"
                             android:drawablePadding="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"></EditText>
+                            android:paddingTop="13dp"
+                            android:paddingBottom="13dp"></EditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="* Mínimo 6 caracteres *"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="300dp"
                         android:layout_height="match_parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="20"
                         app:endIconMode="password_toggle">
 
                         <EditText
                             android:id="@+id/pass"
                             android:layout_width="300dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/blue_border_rounded_cornwe"
                             android:drawableStart="@drawable/ic_bx_key"
                             android:drawableLeft="@drawable/ic_bx_key"
-                            android:drawablePadding="10dp"
                             android:fontFamily="@font/poppins_regular"
                             android:hint="Contraseña"
                             android:inputType="textPassword"
                             android:paddingLeft="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
                             android:textSize="15dp"></EditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

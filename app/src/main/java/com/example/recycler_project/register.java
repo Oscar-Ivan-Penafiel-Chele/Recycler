@@ -1,16 +1,12 @@
 package com.example.recycler_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class register extends AppCompatActivity {
 
@@ -30,7 +26,8 @@ public class register extends AppCompatActivity {
         nombre = nombre1.getText().toString();
         apellido = apellido1.getText().toString();
         telefono = telefono1.getText().toString();
-        if(nombre.equals("") || apellido.equals("")||telefono.equals("")){
+
+        if(nombre.equals("") || nombre.trim().length() <=0 || apellido.equals("") || apellido.trim().length() <= 0 ||telefono.equals("") || telefono.trim().length() <= 0){
             Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }

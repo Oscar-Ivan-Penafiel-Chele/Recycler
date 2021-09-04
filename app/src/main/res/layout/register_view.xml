@@ -141,6 +141,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:hint="Teléfono"
                             android:inputType="number|textEmailAddress"
+                            android:maxLength="10"
                             android:paddingLeft="20dp"
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"

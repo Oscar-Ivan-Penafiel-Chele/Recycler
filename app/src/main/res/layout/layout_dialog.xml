@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/decriptionNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:drawableStart="@drawable/ic_bx_clipboard"
+                    android:drawableLeft="@drawable/ic_bx_clipboard"
+                    android:background="@drawable/ic_rectangle_13"
+                    android:hint="Descripción del Producto"
+                    android:inputType="text"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/weightNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"
+                    android:drawableStart="@drawable/ic_bx_package"
+                    android:drawableLeft="@drawable/ic_bx_package"
+                    android:background="@drawable/ic_rectangle_13"
+                    android:layout_below="@+id/decriptionNameEdit"
+                    android:hint="Peso (gr)"
+                    android:inputType="number"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

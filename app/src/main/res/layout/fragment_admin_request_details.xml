@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AdminRequestDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:background="@drawable/ic_head">
 
             <Button
-                android:id="@+id/btn_back_products"
+                android:id="@+id/backRequestDetails"
                 android:layout_width="28dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
@@ -34,174 +35,58 @@
                 android:textStyle="bold"></TextView>
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="140dp">
-
-            <TableLayout
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="30dp">
-                <TableRow
-                    android:id="@+id/header_table"
+                android:orientation="vertical">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:background="@drawable/border"
-                        android:text="Tipo Material"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:layout_weight="0.5"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:background="@drawable/border"
-                        android:text="Peso (kg)"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:layout_weight="0.5"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Acción"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/border"
-                        android:layout_weight="0.2"
-                        android:gravity="center_horizontal"></TextView>
-                </TableRow>
-                <TableRow
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Papel"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="1"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-
-                    <LinearLayout
-                        android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:background="@drawable/border_body"
-                        android:weightSum="1">
-                        <Button
-                            android:id="@+id/btn_delete"
-                            android:layout_width="31dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
-                    </LinearLayout>
-                </TableRow>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recyclerViewRequestDetails">
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
 
-                <TableRow
-
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Vidrio"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="3"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-                    <LinearLayout
-                        android:layout_weight="0.2"
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:background="@drawable/border_body"
-                        android:weightSum="1">
-                        <Button
-                            android:layout_width="31dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
-                    </LinearLayout>
-                </TableRow>
-                <TableRow
+                        android:text="TOTAL ($): "
+                        android:textStyle="bold"
+                        android:textSize="16dp"></TextView>
+                    <TextView
+                        android:id="@+id/priceTotalText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="16dp"></TextView>
+                </LinearLayout>
 
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/saveRequestDetails"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Plástico"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="0.5"
-                        android:textSize="14dp"
-                        android:background="@drawable/border_body"
-                        android:layout_weight="0.5"></TextView>
-                    <LinearLayout
-                        android:layout_weight="0.2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:background="@drawable/border_body"
-                        android:weightSum="1">
-                        <Button
-                            android:layout_width="31dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_btn_edit"></Button>
-                    </LinearLayout>
-                </TableRow>
-            </TableLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="400dp"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:id="@+id/btn_save_product"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_btn_pass"
-                android:text="confirmar"></Button>
-        </LinearLayout>
-    </RelativeLayout>
-
-</FrameLayout>
+                        android:background="@drawable/ic_button_info"
+                        android:textStyle="bold"
+                        android:text="confirmar"></Button>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,14 +1,21 @@
 package com.example.recycler_project.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.RequestQueue;
+import com.example.recycler_project.ListRequestDetail;
 import com.example.recycler_project.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +23,11 @@ import com.example.recycler_project.R;
  * create an instance of this fragment.
  */
 public class AdminRequestDetailsFragment extends Fragment {
+
+    Button backRequestDetail;
+    RequestQueue requesQueue;
+    List<ListRequestDetail> requestDetails = new ArrayList<>();
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +72,27 @@ public class AdminRequestDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_request_details, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_admin_request_details, container, false);
+
+        backRequestDetail = root.findViewById(R.id.backRequestDetails);
+        recyclerView = root.findViewById(R.id.recyclerViewRequestDetails);
+
+        backRequestDetail.setOnClickListener(this::onBackPress);
+
+        return root;
     }
+
+    public void onBackPress(View v){
+        FragmentManager frm = getActivity().getSupportFragmentManager();
+        frm.beginTransaction()
+                .replace(R.id.navigationAdmin, new AdminRequestFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void getAllRequestDetail(){
+
+    }
+
 }

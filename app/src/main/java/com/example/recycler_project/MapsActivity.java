@@ -317,11 +317,12 @@ public class MapsActivity extends FragmentActivity implements
         builderDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                finish();
             }
         });
 
         alertDialog = builderDialog.create();
         alertDialog.show();
     }
+
 }
