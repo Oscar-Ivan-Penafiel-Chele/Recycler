@@ -124,10 +124,20 @@ public class RegisterProductFragment extends Fragment {
 
     public void getPriceForMaterial(){
         double pesoM;
+        String descriptionProduct, weight;
+        descriptionProduct = descripcion.getText().toString();
+        weight = peso.getText().toString();
+
+        if(!verifySpaceBlank(descriptionProduct,weight)){
+            Toast.makeText(getActivity(), "Llenar todos los campos",Toast.LENGTH_LONG).show();
+            return ;
+        }
+
         pesoM=Double.parseDouble(peso.getText().toString());
 
         HttpsTrustManager.allowAllSSL();
         Bundle datosMaterial= getArguments();
+
         if (datosMaterial == null) {
             // No hay datos, manejar excepción
             return;
@@ -186,5 +196,13 @@ public class RegisterProductFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(),"error comunicacion", Toast.LENGTH_SHORT).show();
         });
         servicio.add(respuesta);
+    }
+
+    private boolean verifySpaceBlank(String description, String weight){
+        if(description.isEmpty() || description.trim().length() < 1 || description.length() < 5 || weight.isEmpty() || weight.trim().length() < 1 ){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

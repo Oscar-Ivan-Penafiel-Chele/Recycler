@@ -54,7 +54,7 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
         FragmentManager manager = ((AppCompatActivity)v.getContext()).getSupportFragmentManager();
         int id = Integer.parseInt(idProduct.getText().toString());
 
-         ExampleDialog exampleDialog = new ExampleDialog();
+         ExampleDialog exampleDialog = new ExampleDialog(id);
          exampleDialog.show(manager,"example dialog");
 
     }

@@ -27,10 +27,11 @@ public class register extends AppCompatActivity {
         apellido = apellido1.getText().toString();
         telefono = telefono1.getText().toString();
 
-        if(nombre.equals("") || nombre.trim().length() <=0 || apellido.equals("") || apellido.trim().length() <= 0 ||telefono.equals("") || telefono.trim().length() <= 0){
-            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+        if(nombre.equals("") || nombre.trim().length() <=0 || apellido.equals("") || apellido.trim().length() <= 0 || telefono.equals("") || telefono.trim().length() <= 0 || nombre.length() < 2 || apellido.length() < 3 || telefono.length() < 10){
+            Toast.makeText(this, "Rellene todos los campos correctamente", Toast.LENGTH_SHORT).show();
             return;
         }
+
         Intent next = new Intent(this, register_2.class);
         next.putExtra("nombre",nombre);
         next.putExtra("apellido",apellido);
