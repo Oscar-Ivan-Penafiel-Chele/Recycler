@@ -39,7 +39,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         builderDialog.setTitle("¿Desea eliminar la ubicación?");
         builderDialog.setIcon(R.drawable.ic_icons8_google_maps_1_);
 
-        String url="https://192.168.1.12/Sentencias/mapAdminDelete.php?idAddress="+id;
+        String url="https://192.168.1.5/Sentencias/mapAdminDelete.php?idAddress="+id;
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

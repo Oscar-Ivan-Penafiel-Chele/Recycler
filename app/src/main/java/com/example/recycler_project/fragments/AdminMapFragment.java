@@ -140,7 +140,7 @@ public class AdminMapFragment extends Fragment {
         final String[] direccion = new String[1];
         Geocoder geocoder = new Geocoder(this.getActivity());;
 
-        String url= "https://192.168.1.12/Sentencias/mapGetLocation.php";
+        String url= "https://192.168.1.5/Sentencias/mapGetLocation.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;

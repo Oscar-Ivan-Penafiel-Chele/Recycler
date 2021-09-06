@@ -135,7 +135,7 @@ public class RegisterProductFragment extends Fragment {
 
         int id=datosMaterial.getInt("id");
 
-        String url ="https://192.168.1.12/Sentencias/Consulta_Material.php?idMaterial="+id;
+        String url ="https://192.168.1.5/Sentencias/Consulta_Material.php?idMaterial="+id;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
             for(int i=0; i<response.length();i++){
@@ -175,7 +175,7 @@ public class RegisterProductFragment extends Fragment {
         String descriptionMaterial = descripcion.getText().toString();
         descriptionMaterial.replace(" ","+");
         
-        String url="https://192.168.1.12/Sentencias/RegistroMaterial.php?idUsuario="+idUsuario+"&idMaterial="+idMaterial+"&idRecicladora="+idLocation+"&descripcionReciclaje="+descriptionMaterial+"&peso="+pesoKilo+"&precioTotal="+precioTotal;
+        String url="https://192.168.1.5/Sentencias/RegistroMaterial.php?idUsuario="+idUsuario+"&idMaterial="+idMaterial+"&idRecicladora="+idLocation+"&descripcionReciclaje="+descriptionMaterial+"&peso="+pesoKilo+"&precioTotal="+precioTotal;
         System.out.println(url);
         RequestQueue servicio = Volley.newRequestQueue(this.getActivity());
         StringRequest respuesta = new StringRequest(

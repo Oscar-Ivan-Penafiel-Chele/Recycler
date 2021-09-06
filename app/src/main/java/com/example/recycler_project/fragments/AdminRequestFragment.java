@@ -113,7 +113,7 @@ public class AdminRequestFragment extends Fragment{
         final int[] idUser = new int[1];
         final String[] apellido = new String[1];
 
-        String url= "https://192.168.1.12/Sentencias/getAllRequest.php";
+        String url= "https://192.168.1.5/Sentencias/getAllRequest.php";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
             for(int i=0; i<response.length();i++){

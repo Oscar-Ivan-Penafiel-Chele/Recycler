@@ -151,7 +151,7 @@ public class ProductsFragment extends Fragment {
         final int[] idProduct = new int[1];
         final int[] idMaterial = new int[1];
 
-        String url= "https://192.168.1.12/Sentencias/getProductsRecycler.php?id="+idUser;
+        String url= "https://192.168.1.5/Sentencias/getProductsRecycler.php?id="+idUser;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
             for(int i=0; i<response.length();i++){
@@ -213,7 +213,7 @@ public class ProductsFragment extends Fragment {
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String url="https://192.168.1.12/Sentencias/updateStateRequest.php?idUser="+idUser;
+                String url="https://192.168.1.5/Sentencias/updateStateRequest.php?idUser="+idUser;
                 RequestQueue servicio= Volley.newRequestQueue(getContext());
                 StringRequest respuesta = new StringRequest(
                         Request.Method.GET, url, (response) -> {

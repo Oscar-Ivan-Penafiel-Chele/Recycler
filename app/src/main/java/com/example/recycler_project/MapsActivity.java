@@ -200,7 +200,7 @@ public class MapsActivity extends FragmentActivity implements
         final String[] direccion = new String[1];
         Geocoder geocoder = new Geocoder(getApplication().getApplicationContext());;
 
-        String url= "https://192.168.1.12/Sentencias/mapGetLocation.php";
+        String url= "https://192.168.1.5/Sentencias/mapGetLocation.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
@@ -251,7 +251,7 @@ public class MapsActivity extends FragmentActivity implements
 
         HttpsTrustManager.allowAllSSL();
 
-        String url= "https://192.168.1.12/Sentencias/mapGetLocation.php";
+        String url= "https://192.168.1.5/Sentencias/mapGetLocation.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;

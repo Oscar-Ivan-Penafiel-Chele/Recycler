@@ -118,7 +118,7 @@ public class EditProductFragment extends Fragment {
     private void getProductById(int id){
         HttpsTrustManager.allowAllSSL();
         final int[] idMaterial = new int[1];
-        String url= "https://192.168.1.12/Sentencias/Consulta.php?idProduct="+id;
+        String url= "https://192.168.1.5/Sentencias/Consulta.php?idProduct="+id;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
             for(int i=0; i < response.length();i++){
@@ -151,7 +151,7 @@ public class EditProductFragment extends Fragment {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/updateUser.php?idProduct="+idProduct+"&descripcion="+descripcion+"&peso="+txt_peso.getText().toString();
+        String url="https://192.168.1.5/Sentencias/updateUser.php?idProduct="+idProduct+"&descripcion="+descripcion+"&peso="+txt_peso.getText().toString();
 
 
         Toast.makeText(getContext(), "Editado producto con éxito", Toast.LENGTH_SHORT).show();
@@ -164,7 +164,7 @@ public class EditProductFragment extends Fragment {
 
         HttpsTrustManager.allowAllSSL();
 
-        String url ="https://192.168.1.12/Sentencias/Consulta_Material.php?idMaterial="+idMaterial;
+        String url ="https://192.168.1.5/Sentencias/Consulta_Material.php?idMaterial="+idMaterial;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
             for(int i=0; i<response.length();i++){

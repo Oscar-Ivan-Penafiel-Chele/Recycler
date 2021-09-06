@@ -55,7 +55,7 @@ public class register_2 extends AppCompatActivity {
         nombre1.replace(" ","+");
         apellido1.replace(" ","+");
 
-        String url="https://192.168.1.12/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contrasena="+contraseña;
+        String url="https://192.168.1.5/Sentencias/Registro2.php?nombre="+nombre1+"&apellido="+apellido1+"&telefono="+telefono1+"&correo="+correo+"&contrasena="+contraseña;
         System.out.println(url);
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(

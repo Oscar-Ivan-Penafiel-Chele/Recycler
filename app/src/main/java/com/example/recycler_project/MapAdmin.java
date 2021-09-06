@@ -210,7 +210,7 @@ public class MapAdmin extends FragmentActivity implements OnMapReadyCallback {
         double latitud = latLng.latitude;
         double longitud = latLng.longitude;
 
-        String url="https://192.168.1.12/Sentencias/mapAdminAdd.php?idUser="+idUser+"&latitud="+latitud+"&longitud="+longitud;
+        String url="https://192.168.1.5/Sentencias/mapAdminAdd.php?idUser="+idUser+"&latitud="+latitud+"&longitud="+longitud;
         RequestQueue servicio = Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {
@@ -241,7 +241,7 @@ public class MapAdmin extends FragmentActivity implements OnMapReadyCallback {
 
         HttpsTrustManager.allowAllSSL();
 
-        String url= "https://192.168.1.12/Sentencias/mapGetLocation.php";
+        String url= "https://192.168.1.5/Sentencias/mapGetLocation.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;

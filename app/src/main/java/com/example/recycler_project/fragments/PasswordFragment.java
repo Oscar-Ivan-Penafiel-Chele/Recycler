@@ -131,7 +131,7 @@ public class PasswordFragment extends Fragment {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/updatePassword.php?id="+id+"&oldPassword="+contrasenaActual+"&newPassword="+nuevaContrasena;
+        String url="https://192.168.1.5/Sentencias/updatePassword.php?id="+id+"&oldPassword="+contrasenaActual+"&newPassword="+nuevaContrasena;
 
         RequestQueue servicio= Volley.newRequestQueue(getContext());
         StringRequest respuesta = new StringRequest(

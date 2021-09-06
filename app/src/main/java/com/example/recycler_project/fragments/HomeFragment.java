@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment {
         SharedPreferences preferences= getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
         int id = preferences.getInt("id",0);
 
-        String url= "https://192.168.1.12/Sentencias/Consulta.php?id="+id;
+        String url= "https://192.168.1.5/Sentencias/Consulta.php?id="+id;
         System.out.println(url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;

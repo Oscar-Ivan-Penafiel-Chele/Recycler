@@ -43,7 +43,7 @@ public class login extends AppCompatActivity {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/Login.php?usuario="+usuario+"&contrasena="+contrasena;
+        String url="https://192.168.1.5/Sentencias/Login.php?usuario="+usuario+"&contrasena="+contrasena;
         RequestQueue servicio= Volley.newRequestQueue(this);
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> { //Logra realizar conexion

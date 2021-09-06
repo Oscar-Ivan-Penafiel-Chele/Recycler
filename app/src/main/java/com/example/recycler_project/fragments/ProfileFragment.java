@@ -111,7 +111,7 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin",Context.MODE_PRIVATE);
         idUser = sharedPreferences.getInt("id",0);
 
-        String url= "https://192.168.1.12/Sentencias/Consulta.php?id="+idUser;
+        String url= "https://192.168.1.5/Sentencias/Consulta.php?id="+idUser;
         System.out.println(url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
             JSONObject jsonObject = null;
@@ -160,7 +160,7 @@ public class ProfileFragment extends Fragment {
             return;
         }
 
-        String url="https://192.168.1.12/Sentencias/updateUser.php?id="+idUser+"&name="+name+"&lastName="+apellido+"&email="+correo+"&cellphone="+telefono;
+        String url="https://192.168.1.5/Sentencias/updateUser.php?id="+idUser+"&name="+name+"&lastName="+apellido+"&email="+correo+"&cellphone="+telefono;
         RequestQueue servicio= Volley.newRequestQueue(getContext());
         StringRequest respuesta = new StringRequest(
                 Request.Method.GET, url, (response) -> {

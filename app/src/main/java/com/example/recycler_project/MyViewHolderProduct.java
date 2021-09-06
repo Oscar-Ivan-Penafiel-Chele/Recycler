@@ -53,8 +53,7 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
     private void editDetailsProduct(View v){
         FragmentManager manager = ((AppCompatActivity)v.getContext()).getSupportFragmentManager();
         int id = Integer.parseInt(idProduct.getText().toString());
-
-         ExampleDialog exampleDialog = new ExampleDialog();
+         ExampleDialog exampleDialog = new ExampleDialog(id);
          exampleDialog.show(manager,"example dialog");
 
     }
@@ -64,7 +63,7 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
         builderDialog.setTitle("¿Desea eliminar el producto?");
         builderDialog.setIcon(R.drawable.ic_bx_error);
 
-        String url="https://192.168.1.12/Sentencias/deleteProduct.php?idProduct="+id;
+        String url="https://192.168.1.5/Sentencias/deleteProduct.php?idProduct="+id;
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
