@@ -277,7 +277,6 @@ public class MapsActivity extends FragmentActivity implements
     private void saveLocation(int position){
         final Hashtable[] hash = {new Hashtable()};
         sharedPreferences = getSharedPreferences("locationRecicler", Context.MODE_PRIVATE);
-        //sharedPreferences.edit().clear().commit();
         String location = "";
         location = spinnerLocation.getItemAtPosition(position).toString();
 
@@ -310,6 +309,8 @@ public class MapsActivity extends FragmentActivity implements
                             }
 
                             Toast.makeText(MapsActivity.this,"Ubicación seleccionada con éxito",Toast.LENGTH_LONG).show();
+                            //agregar zoo a la ubicacion y agregar ruta
+
                         }
                 }
             }
