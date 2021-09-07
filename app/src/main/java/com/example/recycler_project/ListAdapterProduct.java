@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ListAdapterProduct extends RecyclerView.Adapter<MyViewHolderProduct>{
+public class ListAdapterProduct extends RecyclerView.Adapter<MyViewHolderProduct> {
 
     private List<ListProducts> mData;
     private Context context;
@@ -39,4 +39,5 @@ public class ListAdapterProduct extends RecyclerView.Adapter<MyViewHolderProduct
     public int getItemCount() {
         return mData.size();
     }
+
 }

@@ -50,28 +50,33 @@ public class ExampleDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         peso = weightProduct.getText().toString();
                         descripcion = descriptionProduct.getText().toString();
-                        double pre=0;
-                        if(precio.equalsIgnoreCase("1"))
-                            pre=0.22;
-                        if(precio.equalsIgnoreCase("2"))
-                            pre=0.6;
-                        if(precio.equalsIgnoreCase("3"))
-                            pre=0.5;
+                        if(peso.equals("") && peso.equals("") ){
+                            Toast.makeText(v.getContext(), "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
 
-                        double precioTotal = calculationPriceTotal(Double.parseDouble(peso),pre);
-                        System.out.println(precio);
-                        String url = "https://192.168.1.5/Sentencias/EditProduct.php?pesoNuevo="+peso+"&precio="+precioTotal+"&descripcion="+descripcion+"&idMaterial="+id;
-                        System.out.println(id+" "+ peso);
-                        RequestQueue servicio= Volley.newRequestQueue(v.getContext());
-                        StringRequest respuesta = new StringRequest(
-                                Request.Method.GET, url, (response) -> {
+                        }else {
+                            double pre = 0;
+                            if (precio.equalsIgnoreCase("1"))
+                                pre = 0.22;
+                            if (precio.equalsIgnoreCase("2"))
+                                pre = 0.6;
+                            if (precio.equalsIgnoreCase("3"))
+                                pre = 0.5;
 
-                            Toast.makeText(v.getContext(), "Producto actualizado con éxito!",Toast.LENGTH_SHORT).show();
-                        }, (error) -> {
-                            System.out.println(error);
-                            Toast.makeText(v.getContext(),"Sin conexión a internet", Toast.LENGTH_SHORT).show();
-                        });
-                        servicio.add(respuesta);
+                            double precioTotal = calculationPriceTotal(Double.parseDouble(peso), pre);
+                            System.out.println(precio);
+                            String url = "https://192.168.1.5/Sentencias/EditProduct.php?pesoNuevo=" + peso + "&precio=" + precioTotal + "&descripcion=" + descripcion + "&idMaterial=" + id;
+                            System.out.println(id + " " + peso);
+                            RequestQueue servicio = Volley.newRequestQueue(v.getContext());
+                            StringRequest respuesta = new StringRequest(
+                                    Request.Method.GET, url, (response) -> {
+
+                                Toast.makeText(v.getContext(), "Producto actualizado con éxito!", Toast.LENGTH_SHORT).show();
+                            }, (error) -> {
+                                System.out.println(error);
+                                Toast.makeText(v.getContext(), "Sin conexión a internet", Toast.LENGTH_SHORT).show();
+                            });
+                            servicio.add(respuesta);
+                        }
                     }
                 });
         return builder.create();

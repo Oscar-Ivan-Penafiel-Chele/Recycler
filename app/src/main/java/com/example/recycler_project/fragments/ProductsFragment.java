@@ -47,6 +47,11 @@ public class ProductsFragment extends Fragment {
     private AlertDialog alertDialog;
     RequestQueue requesQueue;
     AlertDialog.Builder builderDialog;
+
+    public List<ListProducts> getProducts() {
+        return products;
+    }
+
     List<ListProducts> products = new ArrayList<>();
     RecyclerView recyclerViewProduct;
 
@@ -106,7 +111,8 @@ public class ProductsFragment extends Fragment {
         btn_back.setOnClickListener(this::onClick);
         btn_save.setOnClickListener(this::onClick);
         btn_search.setOnClickListener(this::onClick);
-        getAllProducts();
+        products.clear();
+        getAllProducts(txt_search.getText().toString());
         return root;
     }
 
@@ -123,6 +129,9 @@ public class ProductsFragment extends Fragment {
 
                 break;
             case R.id.btn_search:
+                products.clear();
+                getAllProducts(txt_search.getText().toString());
+                //showSelectedFragment(new ProductsFragment());
 
                 break;
         }
@@ -142,42 +151,82 @@ public class ProductsFragment extends Fragment {
         }
     }
 
-    private void getAllProducts(){
-        HttpsTrustManager.allowAllSSL();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
-        int idUser = sharedPreferences.getInt("id",0);
-        final String[] description = new String[1];
-        final double[] weight = new double[1];
-        final int[] idProduct = new int[1];
-        final int[] idMaterial = new int[1];
+    private void getAllProducts(String b){
 
-        String url= "https://192.168.1.5/Sentencias/getProductsRecycler.php?id="+idUser;
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
-            JSONObject jsonObject = null;
-            for(int i=0; i<response.length();i++){
-                try {
-                    jsonObject = response.getJSONObject(i);
-                    idProduct[0] = jsonObject.getInt("id");
-                    idMaterial[0] = jsonObject.getInt("material_id");
-                    description[0] = jsonObject.getString("descripcion_reciclaje");
-                    weight[0] = jsonObject.getDouble("peso_kilogramo");
+        if(!b.isEmpty()){
+            HttpsTrustManager.allowAllSSL();
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+            int idUser = sharedPreferences.getInt("id", 0);
+            final String[] description = new String[1];
+            final double[] weight = new double[1];
+            final int[] idProduct = new int[1];
+            final int[] idMaterial = new int[1];
 
+            String url = "https://192.168.1.5/Sentencias/getProductosearch.php?idUser=" + idUser +"&descripcion="+b;
+            System.out.println(url);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response) -> {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
                     try {
-                        addProductsRecyclerView(idProduct[0], idMaterial[0], description[0], weight[0]);
-                    } catch (Exception e) {
-                        // No encontro la ubicacion
-                    }
+                        jsonObject = response.getJSONObject(i);
+                        idProduct[0] = jsonObject.getInt("id");
+                        idMaterial[0] = jsonObject.getInt("material_id");
+                        description[0] = jsonObject.getString("descripcion_reciclaje");
+                        weight[0] = jsonObject.getDouble("peso_kilogramo");
 
-                }catch (JSONException e){
-                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        try {
+                            addProductsRecyclerView(idProduct[0], idMaterial[0], description[0], weight[0]);
+                        } catch (Exception e) {
+                            // No encontro la ubicacion
+                        }
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
+            }, (error) -> {
+                Toast.makeText(getActivity().getApplicationContext(), "No se encontraron Productos", Toast.LENGTH_SHORT).show();
             }
-        }, (error)->{
-            Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+            );
+            requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            requesQueue.add(jsonArrayRequest);
+        }else {
+            HttpsTrustManager.allowAllSSL();
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("preferenciaslogin", Context.MODE_PRIVATE);
+            int idUser = sharedPreferences.getInt("id", 0);
+            final String[] description = new String[1];
+            final double[] weight = new double[1];
+            final int[] idProduct = new int[1];
+            final int[] idMaterial = new int[1];
+
+            String url = "https://192.168.1.5/Sentencias/getProductsRecycler.php?id=" + idUser;
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response) -> {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        idProduct[0] = jsonObject.getInt("id");
+                        idMaterial[0] = jsonObject.getInt("material_id");
+                        description[0] = jsonObject.getString("descripcion_reciclaje");
+                        weight[0] = jsonObject.getDouble("peso_kilogramo");
+
+                        try {
+                            addProductsRecyclerView(idProduct[0], idMaterial[0], description[0], weight[0]);
+                        } catch (Exception e) {
+                            // No encontro la ubicacion
+                        }
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, (error) -> {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+            }
+            );
+            requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            requesQueue.add(jsonArrayRequest);
         }
-        );
-        requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        requesQueue.add(jsonArrayRequest);
     }
 
     public void addProductsRecyclerView(int idProduct, int idMaterial , String descripcion , double peso){

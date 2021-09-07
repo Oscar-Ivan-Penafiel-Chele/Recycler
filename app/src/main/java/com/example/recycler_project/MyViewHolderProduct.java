@@ -2,6 +2,7 @@ package com.example.recycler_project;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,13 +11,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.recycler_project.fragments.ProductsFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +35,7 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
     public TextView weightName;
     public TextView idProduct;
     public ImageView iconImageViewProduct;
-
+    Button btn_search;
 
     public MyViewHolderProduct(@NonNull @NotNull View itemView) {
         super(itemView);
@@ -44,7 +48,7 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
         descriptionName = itemView.findViewById(R.id.descriptionName);
         weightName = itemView.findViewById(R.id.weightName);
         idProduct = itemView.findViewById(R.id.idProduct);
-
+        btn_search = itemView.findViewById(R.id.btn_search);
         builderDialog = new AlertDialog.Builder(itemView.getContext());
         editProduct.setOnClickListener(this::editDetailsProduct);
         deleteProduct.setOnClickListener(this::deleteProduct);
@@ -73,10 +77,12 @@ public class MyViewHolderProduct extends RecyclerView.ViewHolder{
                     Toast.makeText(v.getContext(), "Producto eliminado con éxito!",Toast.LENGTH_SHORT).show();
                 }, (error) -> {
                     System.out.println(error);
-                    Toast.makeText(v.getContext(),"Sin conexión a internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),"Sin conexion a internet", Toast.LENGTH_SHORT).show();
                 });
                 servicio.add(respuesta);
+
             }
+
         });
 
         builderDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

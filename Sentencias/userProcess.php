@@ -87,9 +87,36 @@
             echo json_encode($productsRecycler,JSON_UNESCAPED_UNICODE);
         }
 
+        static public function searchProducto($idUser,$descripcion){
+            $sql = "SELECT * FROM reciclado WHERE estado = '1' && usuario_id='$idUser' && descripcion_reciclaje LIKE '%$descripcion%'";
+            $result = mysqli_query($GLOBALS['db'],$sql);
+
+            while($row = mysqli_fetch_assoc($result)){
+                $productsRecycler [] = $row;
+            }
+
+            echo json_encode($productsRecycler,JSON_UNESCAPED_UNICODE);
+        }
 
         static public function getAllRequest(){
             $sql = "SELECT * FROM usuario WHERE estado_peticion = '1'";
+
+            $result = mysqli_query($GLOBALS['db'],$sql);
+            $amountRow = $result -> num_rows;
+
+            if($amountRow <= 0){
+                exit();
+            }
+
+            while($row = mysqli_fetch_assoc($result)){
+                $allRequest [] = $row;
+            }
+
+            echo json_encode($allRequest,JSON_UNESCAPED_UNICODE);
+        }
+
+        static public function getRequest($apellido){
+            $sql = "SELECT * FROM usuario WHERE estado_peticion = '1' && apellido LIKE '%$apellido%'";
 
             $result = mysqli_query($GLOBALS['db'],$sql);
             $amountRow = $result -> num_rows;

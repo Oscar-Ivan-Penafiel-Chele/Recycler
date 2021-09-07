@@ -92,8 +92,8 @@ public class AdminRequestFragment extends Fragment{
         recyclerView = root.findViewById(R.id.recyclerViewRequest);
 
         backRequest.setOnClickListener(this::onBackPress);
-
-        getAllRequest();
+        searchRequesButton.setOnClickListener(this::onClick);
+        getAllRequest(searchRequest.getText().toString());
 
         return root;
     }
@@ -106,36 +106,74 @@ public class AdminRequestFragment extends Fragment{
                 .commit();
     }
 
-    private void getAllRequest(){
-        HttpsTrustManager.allowAllSSL();
-        final String[] nameUser = new String[1];
-        final String[] dateRequest = new String[1];
-        final int[] idUser = new int[1];
-        final String[] apellido = new String[1];
+    public void onClick(View v){
+                requests.clear();
+                getAllRequest(searchRequest.getText().toString());
+    }
+    private void getAllRequest(String b){
+        if(b.isEmpty()) {
+            HttpsTrustManager.allowAllSSL();
+            final String[] nameUser = new String[1];
+            final String[] dateRequest = new String[1];
+            final int[] idUser = new int[1];
+            final String[] apellido = new String[1];
 
-        String url= "https://192.168.1.5/Sentencias/getAllRequest.php";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response)->{
-            JSONObject jsonObject = null;
-            for(int i=0; i<response.length();i++){
-                try {
-                    jsonObject = response.getJSONObject(i);
-                    nameUser[0] = jsonObject.getString("nombre");
-                    apellido[0] = jsonObject.getString("apellido");
-                    dateRequest[0] = jsonObject.getString("fecha_peticion");
-                    idUser[0] = jsonObject.getInt("id");
+            String url = "https://192.168.1.5/Sentencias/getAllRequest.php";
+            System.out.println(url);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response) -> {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        nameUser[0] = jsonObject.getString("nombre");
+                        apellido[0] = jsonObject.getString("apellido");
+                        dateRequest[0] = jsonObject.getString("fecha_peticion");
+                        idUser[0] = jsonObject.getInt("id");
 
-                    addElementsRecyclerView(idUser[0],nameUser[0],apellido[0],dateRequest[0]);
+                        addElementsRecyclerView(idUser[0], nameUser[0], apellido[0], dateRequest[0]);
 
-                }catch (JSONException e){
-                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
+            }, (error) -> {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
             }
-        }, (error)->{
-            Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+            );
+            requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            requesQueue.add(jsonArrayRequest);
+        }else {
+            HttpsTrustManager.allowAllSSL();
+            final String[] nameUser = new String[1];
+            final String[] dateRequest = new String[1];
+            final int[] idUser = new int[1];
+            final String[] apellido = new String[1];
+
+            String url = "https://192.168.1.5/Sentencias/getRequest.php?apellido="+b;
+            System.out.println(url);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, (response) -> {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        nameUser[0] = jsonObject.getString("nombre");
+                        apellido[0] = jsonObject.getString("apellido");
+                        dateRequest[0] = jsonObject.getString("fecha_peticion");
+                        idUser[0] = jsonObject.getInt("id");
+
+                        addElementsRecyclerView(idUser[0], nameUser[0], apellido[0], dateRequest[0]);
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, (error) -> {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de Conexion", Toast.LENGTH_SHORT).show();
+            }
+            );
+            requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            requesQueue.add(jsonArrayRequest);
         }
-        );
-        requesQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        requesQueue.add(jsonArrayRequest);
     }
 
     private void addElementsRecyclerView(int id, String name, String lastName, String date){

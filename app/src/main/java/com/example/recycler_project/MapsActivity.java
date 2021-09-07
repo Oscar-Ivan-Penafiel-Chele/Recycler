@@ -143,7 +143,6 @@ public class MapsActivity extends FragmentActivity implements
                     //We have location
                     LatLng currentUbicateUser = new LatLng(location.getLatitude(), location.getLongitude());
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
                         return;
                     }
                     mMap.setMyLocationEnabled(true);
@@ -291,6 +290,7 @@ public class MapsActivity extends FragmentActivity implements
         builderDialog.setIcon(R.drawable.ic_icons8_google_maps_1_);
 
         String finalLocation = location;
+        String latitud, longitud;
         builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -308,6 +308,7 @@ public class MapsActivity extends FragmentActivity implements
                                 Toast.makeText(MapsActivity.this,"Error en guardar selección",Toast.LENGTH_LONG).show();
                                 return;
                             }
+
                             Toast.makeText(MapsActivity.this,"Ubicación seleccionada con éxito",Toast.LENGTH_LONG).show();
                         }
                 }

@@ -193,8 +193,7 @@ public class MapAdmin extends FragmentActivity implements OnMapReadyCallback {
             address = geo.getFromLocationName(direccion, maxResultados);
             latLng = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-            System.out.println(latLng);
-
+            mMap.addMarker(new MarkerOptions().position(latLng).title(address.get(0).getLocality()));
         } catch (Exception e) {
             addLocation.setEnabled(false);
             Toast.makeText(getApplicationContext(),"La dirección no fue encontrada",Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@ package com.example.recycler_project.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.recycler_project.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileFragment#newInstance} factory method to
@@ -155,6 +157,17 @@ public class ProfileFragment extends Fragment {
         correo = email.getText().toString();
         telefono = cellphone.getText().toString();
 
+
+        if(!verifyBlankSpace(name,apellido,correo,telefono)){
+            Toast.makeText(getContext(),"Llenar todos los campos",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(!validateEmail(correo)){
+            email.setError("Email no válido");
+            Toast.makeText(getActivity(), "Correo electrónico no válido", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(name.isEmpty() || apellido.isEmpty() || correo.isEmpty() || telefono.isEmpty()){
             Toast.makeText(getContext(),"Llenar todos los campos",Toast.LENGTH_SHORT).show();
             return;
@@ -209,5 +222,18 @@ public class ProfileFragment extends Fragment {
             }
 
         }
+    }
+
+    private boolean verifyBlankSpace(String name, String lastname, String email, String phone){
+        if(name.isEmpty() || name.trim().length() < 1 || lastname.isEmpty() || lastname.trim().length() < 1 || email.isEmpty() || email.trim().length() < 1 || phone.isEmpty() || phone.trim().length() < 1 ){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    private boolean validateEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 }
