@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HelpFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_head">
+
+                <Button
+                    android:id="@+id/btn_back_help"
+                    android:layout_width="28dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/ic_arrow_left"></Button>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:paddingTop="18dp"
+                    android:text="Ayuda"
+                    android:textColor="@color/black"
+                    android:textSize="19dp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:id="@+id/btn_politics"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:textSize="16dp"
+                    android:text="Políticas de Privacidad y seguridad"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginTop="90dp">-->
+<!--            <TextView-->
+<!--                android:id="@+id/btn_problems"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:paddingTop="20dp"-->
+<!--                android:textSize="16dp"-->
+<!--                android:text="Reportar Problemas"-->
+<!--                />-->
+<!--        </LinearLayout>-->
+
+    </RelativeLayout>
+
+</FrameLayout>
